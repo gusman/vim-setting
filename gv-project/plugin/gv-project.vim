@@ -12,7 +12,7 @@ let g:gv_macrolist = ''
 " =============================================================
 function! GV_GrepUnderCursor()
         let s:curr_word = expand("<cword>")
-        exec 'cd ' . g:gv_projectdir
+        exec 'cd ' . g:gv_srcdir
         exec 'vimgrep /' . s:curr_word . '/gj ./**/*.c ./**/*.h'
         exec 'cw'
 endfunction
@@ -58,8 +58,11 @@ function! GV_Init()
         py create_macrolistfile()
 
         " Update some plugins global variable value
-        let g:ifdef_filename = g:gv_macro_list
-        echo g:ifdef_filename
+        let g:ifdef_filename = g:gv_macrolist
+
+        " Go to source directory
+        exec 'cd ' . g:gv_srcdir
 endfunction
 
+nnoremap <silent> <F4> :call GV_Init() <CR>
 
