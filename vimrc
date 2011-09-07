@@ -2,7 +2,7 @@
 " Common configuration
 "===================================================================
 " User name
-let g:ex_usr_name="Gusman Dharma Putra"
+let g:usr_name="Gusman Dharma Putra"
 
 " Use vim setting rather than vi setting
 set nocompatible
@@ -65,9 +65,6 @@ set wildmode=list:longest
 "set ai                          "autoindent
 "set si                          "smartindent
 set backspace=indent,eol,start  "backspace behaviour
-set tabstop=8                   "tabsize
-set expandtab                   "convert tab to space
-set shiftwidth=8                "shiftwidth
 syntax on                       "enable syntax color
 set hlsearch                    "higlight search resut
 set nowrap                      "nowrapping text
@@ -81,34 +78,53 @@ set ic                          "ignore case sensitive
 " Only do this part when compiled with support for autocommands.
 " By default autocommand is active
 if has("autocmd")
-        " Use the default filetype settings, so that mail gets 'tw' set to 72,
-        " 'cindent' is on in C files, etc.
-        " Also load indent files, to automatically do language-dependent indenting.
-        filetype plugin indent on
+    " Use the default filetype settings, so that mail gets 'tw' set to 72,
+    " 'cindent' is on in C files, etc.
+    " Also load indent files, to automatically do language-dependent indenting.
+	filetype plugin indent on
 
-        " Put these in an autocmd group, so that we can delete them easily.
-        augroup vimrcEx
-        au!
+    " Put these in an autocmd group, so that we can delete them easily.
+    augroup vimrcEx
+    au!
 
-        " For all text files set 'textwidth' to 78 characters.
-        autocmd FileType text setlocal textwidth=78
+    " For all text files set 'textwidth' to 78 characters.
+    " autocmd FileType text setlocal textwidth=78
 
-        " When editing a file, always jump to the last known cursor position.
-        " Don't do it when the position is invalid or when inside an event handler
-        " (happens when dropping a file on gvim).
-        " Also don't do it when the mark is in the first line, that is the default
-        " position when opening a file.
-        autocmd BufReadPost *
-        \ if line("'\"") > 1 && line("'\"") <= line("$") |
-        \   exe "normal! g`\"" |
-        \ endif
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    " Also don't do it when the mark is in the first line, that is the default
+    " position when opening a file.
+    autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+    augroup END
 
-        augroup END
+
+    " auto command for FileType tex : wrap and linebreak
+    autocmd FileType tex setlocal wrap
+    autocmd FileType tex setlocal linebreak
+
+    " auto command for c file 
+    autocmd FileType c setlocal shiftwidth=8
+    autocmd FileType c setlocal tabstop=8
+    autocmd FileType c setlocal expandtab "convert tab to space
+
+    " auto command for python file
+    autocmd FileType python setlocal shiftwidth=4
+    autocmd FileType python setlocal tabstop=4
+    autocmd FileType python setlocal expandtab "convert tab to space
+    autocmd FileType python setlocal textwidth=79
+
+    " auto commad for vim file
+    autocmd FileType vim setlocal shiftwidth=4
+    autocmd FileType vim setlocal tabstop=4
+    autocmd FileType vim setlocal expandtab "convert tab to space
+    autocmd FileType vim setlocal textwidth=79
 
 else
-
         set autoindent " always set autoindenting on
-
 endif " has("autocmd")
 
 
@@ -116,27 +132,27 @@ endif " has("autocmd")
 " GUI Vim
 " ================================================================
 if has("gui_running")
-        " Remove Gui Toolbar, it's useless
-        set guioptions-=T
+    " Remove Gui Toolbar, it's useless
+    set guioptions-=T
 
-        " Set line and column number
-        set lines=44 columns=120
+    " Set line and column number
+    " set lines=44 columns=120
 
-        " Color theme for GUI mode
-        color desert
-       
-        " Font selection
-        if has("gui_gtk2")
-                set guifont=Terminus\ 10
-        elseif has("gui_photon")
-                set guifont=Courier\ New:s11
-        elseif has("gui_kde")
-                set guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
-        elseif has("x11")
-                set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
-        else
-                set guifont=dina:h8:cDEFAULT
-        endif
+    " Color theme for GUI mode
+    color desert
+   
+    " Font selection
+    if has("gui_gtk2")
+            set guifont=Terminus\ 10
+    elseif has("gui_photon")
+            set guifont=Courier\ New:s11
+    elseif has("gui_kde")
+            set guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
+    elseif has("x11")
+            set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
+    else
+            set guifont=consolas:h10:cDEFAULT
+    endif
 endif
 
 
@@ -228,15 +244,7 @@ nnoremap <silent> <S-q>     :tabc<CR>
 " let g:Tex_ViewRule_ps  = 'evince'
 
 " pdf output previewer
- "let g:Tex_ViewRule_pdf = 'evince'	
+" let g:Tex_ViewRule_pdf = 'evince'	
 
 " default output (if not set, default is dvi)
-"let g:Tex_DefaultTargetFormat = 'pdf'
-
-" set wrap and linebreak
-" autocmd FileType tex setlocal wrap
-" autocmd FileType tex setlocal linebreak
-
-" This line for development only
-source $HOME/.vim/plugin/gv-project.vim
-
+" let g:Tex_DefaultTargetFormat = 'pdf'
