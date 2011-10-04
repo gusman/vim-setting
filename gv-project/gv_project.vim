@@ -11,6 +11,28 @@ let g:prj_conf_filename = ''
 let g:prj_debug = 1
 
 " ==========================
+" cscope configuration
+" ==========================
+if has("cscope")
+    set csprg=C:\mingw\bin\cscope.exe
+    set csto=0
+    set cst
+    set nocsverb
+
+    "example for cscope scritp
+    " add any database in current directory
+    " if filereadable("cscope.out")
+    "    cs add cscope.out
+    " else add database pointed to by environment
+    " elseif $CSCOPE_DB != ""
+    "    cs add $CSCOPE_DB
+    " endif
+    set csverb
+endif
+
+
+
+" ==========================
 " Load python file
 " ==========================
 pyfile D:/git/vim-setting/gv-project/gv_project.py

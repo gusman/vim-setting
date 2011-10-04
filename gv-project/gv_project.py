@@ -102,7 +102,7 @@ def gv_gentags():
 
     ctagsfile = vim.eval("g:ctags_file")
     srcdir = vim.eval("g:src_dir")
-    cmd = "ctags -R "  + " -o " + ctagsfile + " " + srcdir
+    cmd = "ctags -R -V "  + " -o " + ctagsfile + " " + srcdir
     os.system(cmd)
 
 def gv_settags():

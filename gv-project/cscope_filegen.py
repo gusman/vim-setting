@@ -30,9 +30,14 @@ for root, dirs, files in os.walk(src_dir):
 
         if iswrite:
             filename = root + "\\" + name +"\n"
+            print filename[:len(filename)-1]
             f.write(filename)
-
 f.close()
+
+# generate cscope database
+os.chdir(cscope_dir)
+cmd = "cscope -b -k -v"
+os.system(cmd)
 
     #print sum([getsize(join(root, name)) for name in files]),
     #print "bytes in", len(files), "non-directory files"
