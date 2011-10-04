@@ -3,6 +3,12 @@ This porject create using:
 - Python script
 - Vim script
 
+extenal plugin should included
+1. Omnicpp completion
+2. Taglist
+3. NerdTree
+4. Cscope Map
+
 TODO:
 =========
 
