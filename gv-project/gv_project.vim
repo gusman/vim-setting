@@ -1,18 +1,16 @@
-" ===========================
-" gv_project global variabel
-" ===========================
-let g:prj_name = 'gv-python'
+" ==========================
+" cscope configuration
+" ==========================
+"
+let g:prj_name = ''
 let g:ctags_file = ''
-let g:cscope_file = ''
-let g:src_dir = 'D:\git\vim-setting\gv-project'
-let g:gv_dir = $HOME . '\.gvproj'
+let g:cscope_db = ''
+let g:src_dir = ''
+let g:gv_dir = ''
 let g:conf_dir = ''
 let g:prj_conf_filename = ''
 let g:prj_debug = 1
 
-" ==========================
-" cscope configuration
-" ==========================
 if has("cscope")
     set csprg=C:\mingw\bin\cscope.exe
     set csto=0
@@ -31,30 +29,28 @@ if has("cscope")
 endif
 
 
+function! GV_ProjectInfo()
+    echo g:prj_name
+    echo g:ctags_file
+    echo g:cscope_db
+    echo g:src_dir
+    echo g:conf_dir
+endfunction
 
 " ==========================
 " Load python file
 " ==========================
 pyfile D:/git/vim-setting/gv-project/gv_project.py
 
-" =========================
-" Function list
-" =========================
-function! GV_ProjectInfo()
-    echo g:prj_name
-    echo g:ctags_file
-    echo g:cscope_file
-    echo g:src_dir
-    echo g:conf_dir
-endfunction
-
-
 " ========================
 " Test area
 " ========================
+py gv_load("D:/git/vim-setting/gv-project/prj.conf")
 py gv_init()
-py gv_gentags()
-py gv_settags()
+call GV_ProjectInfo()
+"py gv_gencsope()
+"py gv_gentags()
+"py gv_settags()
 
 " ========================
 " Key mapping
