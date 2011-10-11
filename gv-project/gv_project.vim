@@ -40,14 +40,15 @@ endfunction
 " ==========================
 " Load python file
 " ==========================
-pyfile D:/git/vim-setting/gv-project/gv_project.py
+"pyfile D:/git/vim-setting/gv-project/gv_project.py
 
 " ========================
 " Test area
 " ========================
-py gv_load("D:/git/vim-setting/gv-project/prj.conf")
-py gv_init()
-call GV_ProjectInfo()
+"py gv_load("D:/git/vim-setting/gv-project/prj.conf")
+"py gv_load()
+"py gv_init()
+"call GV_ProjectInfo()
 "py gv_gencsope()
 "py gv_gentags()
 "py gv_settags()

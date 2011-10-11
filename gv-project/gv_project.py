@@ -2,6 +2,7 @@
 
 import os
 import vim
+import platform
 from os.path import join, getsize
 
 debug = 1
@@ -110,10 +111,14 @@ def gv_settags():
         print ">> SET TAGS"
 
     ctagsfile = vim.eval("g:ctags_file")
+    if not os.path.isfile(ctagsfile):
+        print "CTAGS FILE: " + ctagsfile + " -> Not exist!"
+        return
 
     # I don't know, why the command must be in variable
     # If not in variable, command will not run properly
     cmd = "set tags=" + ctagsfile   
+    print cmd
     vim.command(cmd)
 
 def gv_updatetags():
@@ -141,11 +146,11 @@ def gv_gencsope():
             ext1 = name[len(name)-2:len(name)]
             ext2 = name[len(name)-4:len(name)]
             
-            if ".c" == ext1:
+            if ".c" == ext1 or ".C" == ext1:
                 iswrite = 1
-            elif ".h" == ext1:
+            elif ".h" == ext1 or ".H" == ext1:
                 iswrite = 1
-            elif ".cpp" == ext2:
+            elif ".cpp" == ext2 or ".CPP" == ext2:
                 iswrite = 1
 
             if iswrite:
@@ -157,18 +162,27 @@ def gv_gencsope():
     # generate cscope database
     os.chdir(confdir)
     cmd = "cscope -b -k -v"
+
+    # if in Linux add reverse database
+    if platform.system() == 'Linux':
+        cmd += " -q"
+
     os.system(cmd)
 
 def gv_addcscope():
     cscopedb = vim.eval("g:cscope_db")
     if os.path.isfile(cscopedb):
-        cmd = "cd add " + cscopedb
+        cmd = "cs add " + cscopedb
         vim.command(cmd)
     else:
         print "CSCOPE DB FILE NOT EXIST"
 
-def gv_load(filepath):
-    gv_getconfig(filepath)
+def gv_load(prjconf="./gvproj/prj.conf"):
+    if not os.path.isfile(prjconf):
+        print prjconf + ": NOT EXIST!"
+        return
+
+    gv_getconfig(prjconf)
     gv_settags()
     gv_addcscope()
 
