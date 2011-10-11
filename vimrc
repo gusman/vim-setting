@@ -108,19 +108,16 @@ if has("autocmd")
 
     " auto command for c file 
     autocmd FileType c setlocal shiftwidth=8
-    autocmd FileType c setlocal tabstop=8
-    autocmd FileType c setlocal expandtab "convert tab to space
+    autocmd FileType c setlocal softtabstop=8
 
     " auto command for python file
     autocmd FileType python setlocal shiftwidth=4
-    autocmd FileType python setlocal tabstop=4
-    autocmd FileType python setlocal expandtab "convert tab to space
+    autocmd FileType python setlocal softtabstop=4
     autocmd FileType python setlocal textwidth=79
 
     " auto commad for vim file
     autocmd FileType vim setlocal shiftwidth=4
-    autocmd FileType vim setlocal tabstop=4
-    autocmd FileType vim setlocal expandtab "convert tab to space
+    autocmd FileType vim setlocal softtabstop=4
     autocmd FileType vim setlocal textwidth=79
 
 else
@@ -143,15 +140,15 @@ if has("gui_running")
    
     " Font selection
     if has("gui_gtk2")
-            set guifont=Terminus\ 10
+        set guifont=Terminus\ 10
     elseif has("gui_photon")
-            set guifont=Courier\ New:s11
+        set guifont=Courier\ New:s11
     elseif has("gui_kde")
-            set guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
+        set guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
     elseif has("x11")
-            set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
+        set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-            set guifont=consolas:h10:cDEFAULT
+        set guifont=consolas:h10:cDEFAULT
     endif
 endif
 
