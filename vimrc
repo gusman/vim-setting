@@ -11,7 +11,7 @@ set nocompatible
 set langmenu=none
 
 " Don't use local version of .(g)vimrc, .exrc
-set noexrc
+" set noexrc
 
 " Set ruler
 set ruler
@@ -107,18 +107,24 @@ if has("autocmd")
     autocmd FileType tex setlocal linebreak
 
     " auto command for c file 
+    autocmd FileType c setlocal tabstop=8
     autocmd FileType c setlocal shiftwidth=8
     autocmd FileType c setlocal softtabstop=8
+    autocmd FIleType c setlocal noexpandtab
 
     " auto command for python file
+    autocmd FileType python setlocal tabstop=4
     autocmd FileType python setlocal shiftwidth=4
     autocmd FileType python setlocal softtabstop=4
     autocmd FileType python setlocal textwidth=79
+    autocmd FIleType python setlocal noexpandtab
 
     " auto commad for vim file
+    autocmd FileType vim setlocal tabstop=4
     autocmd FileType vim setlocal shiftwidth=4
     autocmd FileType vim setlocal softtabstop=4
     autocmd FileType vim setlocal textwidth=79
+    autocmd FIleType vim setlocal noexpandtab
 
 else
         set autoindent " always set autoindenting on
@@ -148,7 +154,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=consolas:h10:cDEFAULT
+        set guifont=terminus:h12:cDEFAULT
     endif
 endif
 

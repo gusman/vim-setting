@@ -53,7 +53,7 @@ def gv_parsefile(filepath):
             break
 
         if '#' != c:
-            if 1 == rmod: projectname += c
+	    if 1 == rmod: projectname += c
             elif 2 == rmod: ctagsfile += c
             elif 3 == rmod: cscopedb += c
             elif 4 == rmod: srcdir += c
@@ -140,7 +140,7 @@ def gv_gencsope():
 
     # generate cscope files
     f = open(cscopefile, 'w') 
-    for root, dirs, files in os.walk(srcdir):
+    for root, dirs, files in os.walk(srcdir, followlinks=True):
         for name in files:
             iswrite = 0;
             ext1 = name[len(name)-2:len(name)]

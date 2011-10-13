@@ -45,6 +45,7 @@ endfunction
 " ========================
 " Test area
 " ========================
+
 "py gv_load("D:/git/vim-setting/gv-project/prj.conf")
 "py gv_load()
 "py gv_init()
