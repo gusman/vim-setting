@@ -113,14 +113,12 @@ if has("autocmd")
     autocmd FIleType c setlocal noexpandtab
 
     " auto command for python file
-    autocmd FileType python setlocal tabstop=4
     autocmd FileType python setlocal shiftwidth=4
     autocmd FileType python setlocal softtabstop=4
     autocmd FileType python setlocal textwidth=79
     autocmd FIleType python setlocal noexpandtab
 
     " auto commad for vim file
-    autocmd FileType vim setlocal tabstop=4
     autocmd FileType vim setlocal shiftwidth=4
     autocmd FileType vim setlocal softtabstop=4
     autocmd FileType vim setlocal textwidth=79
@@ -154,7 +152,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=terminus:h12:cDEFAULT
+        set guifont=terminus:h11:cDEFAULT
     endif
 endif
 
