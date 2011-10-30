@@ -152,7 +152,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=terminus:h11:cDEFAULT
+        set guifont=Envy\ Code\ R:h10:cDEFAULT
     endif
 endif
 
@@ -163,6 +163,16 @@ endif
 " Search hilight turn off key
 nnoremap <silent> <S-h>     :nohlsearch<CR>
 
+" Paste setting into terminal toggle
+nnoremap <F2>		    :set invpaste?<CR>
+set pastetoggle=<F2>
+set showmode
+
+" ================================================================
+" Pathogen
+" ================================================================
+call pathogen#infect()
+call pathogen#helptags()
 
 " ================================================================
 " Visual mode mapping
@@ -178,39 +188,39 @@ nnoremap <silent> <S-h>     :nohlsearch<CR>
 " Tab pages mapping
 " ================================================================
 " Tab new
-nnoremap <silent> <S-t>     :tabnew<CR>
+nmap <silent> <S-t>     :tabnew<CR>
 " Tab next
-nnoremap <silent> <S-right>  :tabn<CR>
+nmap <silent> <S-right> :tabn<CR>
 " Tab previous
-nnoremap <silent> <S-left> :tabp<CR>
+nmap <silent> <S-left>  :tabp<CR>
 " Tab close
-nnoremap <silent> <S-q>     :tabc<CR>
-
+nmap <silent> <S-q>     :tabc<CR>
 
 " ================================================================
-" Project mapping (project plugin)
+" NERD Tree key mapping and configuration
 " ================================================================
-" Project's Flags configuration
-" let g:proj_flags="imstvcg"
-" Project Window's width
-" let g:proj_window_width = 30
-" Project Windows's increment
-" let g:proj_window_increment = 0
+nnoremap <silent> <F9>	:NERDTreeToggle<CR>
 
+" Quite when enter file "
+let NERDTreeQuitOnOpen = 1
+" Show bookmarks "
+let NERDTreeShowBookmars = 1
+" Set win pos at right"
+let NERDTreeWinPos = "right"
 
 
 " ================================================================
 " Taglist mapping (taglist plugin)
 " ================================================================
 " Togle taglist menu
-" nnoremap <silent> <F8>      :TlistToggle<CR>
+nnoremap <silent> <F8>      :TlistToggle<CR>
 
 " Displaying tags for only one file~
-" let Tlist_Show_One_File = 1
+let Tlist_Show_One_File = 1
 " If you are the last, kill yourself
-" let Tlist_Exist_OnlyWindow = 1
+let Tlist_Exist_OnlyWindow = 1
 " Split to the right side of the screen
-" let Tlist_Use_Right_Window = 1
+let Tlist_Use_Right_Window = 0
 " Sort by order or name
 " let Tlist_Sort_Type = "order"
 " Do not show prototypes and not tags in the taglist window.
@@ -218,13 +228,13 @@ nnoremap <silent> <S-q>     :tabc<CR>
 " Remove extra information and blank lines from the taglist window.
 " let Tlist_Compart_Format = 1
 " Jump to taglist window on open.
-" let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
 " Show tag scope next to the tag name.
-" let Tlist_Display_Tag_Scope = 1
+let Tlist_Display_Tag_Scope = 1
 " Close the taglist window when a file or tag is selected.
-" let Tlist_Close_On_Select = 1
+let Tlist_Close_On_Select = 1
 " Don't Show the fold indicator column in the taglist window.
-" let Tlist_Enable_Fold_Column = 0
+let Tlist_Enable_Fold_Column = 0
 " Tlist Window's width
 " let Tlist_WinWidth = 40
 
