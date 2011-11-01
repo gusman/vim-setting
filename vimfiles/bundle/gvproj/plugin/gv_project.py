@@ -153,7 +153,7 @@ def gv_gencscope():
                 iswrite = 1
 
             if iswrite:
-                filename = root + "\\" + name +"\n"
+                filename = root + '/' + name +"\n"
                 #print filename[:len(filename)-1]
                 f.write(filename)
     f.close()
@@ -176,7 +176,32 @@ def gv_addcscope():
     else:
         print "CSCOPE DB FILE NOT EXIST"
 
-def gv_load(prjconf="./gvproj/prj.conf"):
+def gv_loadlist():
+    confdir = vim.eval("g:conf_dir")
+    srcdir = vim.eval("g:src_dir")
+    confdir = dir_trim(confdir)
+    cscopefile = confdir + "cscope.files"
+
+    if not os.path.isfile(cscopefile) :
+        print confdir + ": NOT EXIST"
+        return
+
+    print "Loading file"
+
+    # generate cscope files
+    f = open(cscopefile, 'r') 
+    while True:
+	path = f.readline()
+	if (0 == len(path)):
+	    break;
+	path = path[0:len(path) - 1]
+	vim.command("call add(g:alist,'" + path + "')")
+
+    print "Finish"
+
+    f.close()
+
+def gv_load(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
         print prjconf + ": NOT EXIST!"
         return
@@ -184,6 +209,7 @@ def gv_load(prjconf="./gvproj/prj.conf"):
     gv_getconfig(prjconf)
     gv_settags()
     gv_addcscope()
+    gv_loadlist()
 
 def gv_init():
     #gvdir = vim.eval("g:gv_dir")

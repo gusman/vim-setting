@@ -47,19 +47,25 @@ endif
 let g:fuf_abbrevMap = {
     \   '^prj:' : [ g:src_dir.'**/' ],
 \}
+
+" ===================================
+" FUF
+" ===================================
+let g:alist = []
+let g:fuf_enumeratingLimit = 25
+
 " ===================================
 " Function list
 " ===================================
 function! GV_ProjectInfo()
-    echo g:prj_name
-    echo g:ctags_file
-    echo g:cscope_db
-    echo g:src_dir
-    echo g:conf_dir
+    echo "PROJ NAME" . g:prj_name
+    echo "TAGS FILE" . g:ctags_file
+    echo "CSCOPE DB" . g:cscope_db
+    echo "SRC DIR"   . g:src_dir
+    echo "CONF DIR"  . g:conf_dir
 endfunction
 
 function! GV_Load()
-    " using windows default ./gvproj/prj.conf doesn't work
     py gv_load()
 endfunction
 
@@ -71,13 +77,18 @@ function! GV_GenCtags()
     py gv_gentags()
 endfunction
 
+function! GV_FUFList()
+    call fuf#givenfile#launch('', 1, '>', g:alist)
+endfunction
+
 " ========================
 " Key mapping
 " ========================
-" Should no space after fuf abrev, in this case prj:
-nmap <F7>  : FufFile prj:<CR> 
+nmap <F6>  : FufRenewCache<CR>
+nmap <F7>  : call GV_FUFList()<CR> 
 " <F8> : already used in vimrc for taglist toggle
 " <F9> : already used in vimrc for NerdTree toggle
 nmap <F10> : call GV_Load()<CR> 
 nmap <F11> : call GV_GenCtags()<CR>
-nmap <F12> : call GV_GenCscope( <CR>
+nmap <F12> : call GV_GenCscope() <CR>
+
