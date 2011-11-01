@@ -195,7 +195,8 @@ def gv_loadlist():
 	if (0 == len(path)):
 	    break;
 	path = path[0:len(path) - 1]
-	vim.command("call add(g:alist,'" + path + "')")
+	cmd = "call add(g:alist,\"" + path + "\")"
+	vim.command(cmd)
 
     print "Finish"
 

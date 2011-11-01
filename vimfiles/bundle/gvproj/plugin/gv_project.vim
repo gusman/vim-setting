@@ -78,7 +78,7 @@ function! GV_GenCtags()
 endfunction
 
 function! GV_FUFList()
-    call fuf#givenfile#launch('', 1, '>', g:alist)
+    call fuf#givenfile#launch('', 0, 'PRJ>', g:alist)
 endfunction
 
 " ========================
