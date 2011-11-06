@@ -42,27 +42,25 @@ else
 endif
 
 " ===================================
-" FUF abrev map
-" ===================================
-let g:fuf_abbrevMap = {
-    \   '^prj:' : [ g:src_dir.'**/' ],
-\}
-
-" ===================================
 " FUF
 " ===================================
 let g:alist = []
 let g:fuf_enumeratingLimit = 25
+let g:fuf_maxMenuWidth = 78 " will be adjusted 
 
 " ===================================
 " Function list
 " ===================================
 function! GV_ProjectInfo()
-    echo "PROJ NAME" . g:prj_name
-    echo "TAGS FILE" . g:ctags_file
-    echo "CSCOPE DB" . g:cscope_db
-    echo "SRC DIR"   . g:src_dir
-    echo "CONF DIR"  . g:conf_dir
+    echo "PROJ NAME: " . g:prj_name
+    echo "TAGS FILE: " . g:ctags_file
+    echo "CSCOPE DB: " . g:cscope_db
+    echo "SRC DIR: "   . g:src_dir
+    echo "CONF DIR: "  . g:conf_dir
+endfunction
+
+function! GV_Init()
+    py gv_init()
 endfunction
 
 function! GV_Load()
@@ -71,6 +69,7 @@ endfunction
 
 function! GV_GenCscope()
     py gv_gencscope()
+    cs reset
 endfunction
 
 function! GV_GenCtags()
@@ -78,7 +77,7 @@ function! GV_GenCtags()
 endfunction
 
 function! GV_FUFList()
-    call fuf#givenfile#launch('', 0, 'PRJ>', g:alist)
+    call fuf#givenfile#launch('', 1, 'PRJ>', g:alist)
 endfunction
 
 " ========================
@@ -87,7 +86,7 @@ endfunction
 nmap <F6>  : FufRenewCache<CR>
 nmap <F7>  : call GV_FUFList()<CR> 
 " <F8> : already used in vimrc for taglist toggle
-" <F9> : already used in vimrc for NerdTree toggle
+" <F9> : already used in vimrc for NERDTree toggle
 nmap <F10> : call GV_Load()<CR> 
 nmap <F11> : call GV_GenCtags()<CR>
 nmap <F12> : call GV_GenCscope() <CR>

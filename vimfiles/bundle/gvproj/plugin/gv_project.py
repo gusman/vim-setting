@@ -97,13 +97,53 @@ def gv_saveconfig():
     gv_dumptofile(filepath, projectname, ctagsfile, \
                 cscopedb, srcdir, confdir)
 
+def gv_collectsrc():
+    confdir = vim.eval("g:conf_dir")
+    srcdir = vim.eval("g:src_dir")
+    confdir = dir_trim(confdir)
+    srclist = confdir + "project.files"
+
+    if not os.path.isdir(confdir):
+        print confdir + ": NOT EXIST"
+        return
+
+    # generate cscope files
+    f = open(srclist, 'w') 
+    for root, dirs, files in os.walk(srcdir, followlinks=True):
+        for name in files:
+            iswrite = 0;
+            ext1 = name[len(name)-2:len(name)]
+            ext2 = name[len(name)-4:len(name)]
+            
+            if ".c" == ext1 or ".C" == ext1:
+                iswrite = 1
+            elif ".h" == ext1 or ".H" == ext1:
+                iswrite = 1
+            elif ".cpp" == ext2 or ".CPP" == ext2:
+                iswrite = 1
+
+            if iswrite:
+                filename = root + '/' + name +"\n"
+                #print filename[:len(filename)-1]
+                f.write(filename)
+    f.close()
+
 def gv_gentags():
     if debug == 1:
         print ">> GEN TAGS"
 
+    confdir = vim.eval("g:conf_dir")
+    confdir = dir_trim(confdir)
+    srclist = confdir + "project.files"
+
+    if not os.path.isfile(srclist):
+	print srclist + " NOT EXIST"
+	return 
+
     ctagsfile = vim.eval("g:ctags_file")
     srcdir = vim.eval("g:src_dir")
-    cmd = "ctags -RV "  + " -o " + ctagsfile + " " + srcdir
+    cmd = "ctags -V --c++-kinds=+p --fields=+iaS --extra=+q " + \
+	  " -o " + ctagsfile +  " -L " + srclist
     os.system(cmd)
 
 def gv_settags():
@@ -129,43 +169,22 @@ def gv_updatetags():
 
 def gv_gencscope():
     confdir = vim.eval("g:conf_dir")
-    srcdir = vim.eval("g:src_dir")
     confdir = dir_trim(confdir)
-    cscopefile = confdir + "cscope.files"
+    srclist  = confdir + "project.files"
+    cscopeout = confdir + "cscope.out"
 
-    if not os.path.isdir(confdir) :
-        print confdir + ": NOT EXIST"
-        return
-
-    # generate cscope files
-    f = open(cscopefile, 'w') 
-    for root, dirs, files in os.walk(srcdir, followlinks=True):
-        for name in files:
-            iswrite = 0;
-            ext1 = name[len(name)-2:len(name)]
-            ext2 = name[len(name)-4:len(name)]
-            
-            if ".c" == ext1 or ".C" == ext1:
-                iswrite = 1
-            elif ".h" == ext1 or ".H" == ext1:
-                iswrite = 1
-            elif ".cpp" == ext2 or ".CPP" == ext2:
-                iswrite = 1
-
-            if iswrite:
-                filename = root + '/' + name +"\n"
-                #print filename[:len(filename)-1]
-                f.write(filename)
-    f.close()
+    if not os.path.isfile(srclist):
+	print srclist + " NOT EXIST"
+	return 
 
     # generate cscope database
-    os.chdir(confdir)
-    cmd = "cscope -b -k -v"
+    cmd = "cscope -b -k -v "
 
     # if in Linux add reverse database
     if platform.system() == 'Linux':
         cmd += " -q"
 
+    cmd += "-i " + srclist + " -f " + cscopeout
     os.system(cmd)
 
 def gv_addcscope():
@@ -180,7 +199,7 @@ def gv_loadlist():
     confdir = vim.eval("g:conf_dir")
     srcdir = vim.eval("g:src_dir")
     confdir = dir_trim(confdir)
-    cscopefile = confdir + "cscope.files"
+    cscopefile = confdir + "project.files"
 
     if not os.path.isfile(cscopefile) :
         print confdir + ": NOT EXIST"
@@ -195,7 +214,10 @@ def gv_loadlist():
 	if (0 == len(path)):
 	    break;
 	path = path[0:len(path) - 1]
-	cmd = "call add(g:alist,\"" + path + "\")"
+	if platform.system() == 'Linux':
+	    cmd = "call add(g:alist,\"" + path + "\")"
+	else:
+	    cmd = "call add(g:alist,'" + path + "')"
 	vim.command(cmd)
 
     print "Finish"
@@ -212,37 +234,15 @@ def gv_load(prjconf=".gvproj/prj.conf"):
     gv_addcscope()
     gv_loadlist()
 
-def gv_init():
-    #gvdir = vim.eval("g:gv_dir")
-    #prjname = vim.eval("g:prj_name")
-
-    #if not os.path.isdir(gvdir):
-    #    os.mkdir(gvdir)
-
-    # create conf dir in root folder of source code
-    srcdir = vim.eval("g:src_dir")
-    if not os.path.isdir(srcdir):
-        print srcdir + ": Not exists"
+def gv_init(prjconf=".gvproj/prj.conf"):
+    if not os.path.isfile(prjconf):
+        print prjconf + ": NOT EXIST!"
         return
 
-    srcdir = dir_trim(srcdir)
-    confdir = srcdir + ".gvproj"
-    if not os.path.isdir(confdir):
-        os.mkdir(confdir)
-    vim.command("let g:conf_dir = '" + confdir + "'")
-
-    # create proj conf file
-    confdir = dir_trim(confdir)
-    prj_conf_filepath = confdir + "prj.conf"
-    vim.command("let g:prj_conf_filename = '" + prj_conf_filepath + "'")
-
-    # set tagsfile global variable
-    ctagsfile = confdir + "tags"
-    vim.command("let g:ctags_file = '" + ctagsfile + "'")
-    
-    # set cscopefile global variable
-    cscopedb = confdir + "cscope.out"
-    vim.command("let g:cscope_db = '" + cscopedb + "'")
-
-    # save configuration
-    gv_saveconfig()
+    gv_getconfig(prjconf) 
+    gv_collectsrc()
+    gv_loadlist()
+    gv_gentags()
+    gv_gencscope()
+    gv_settags()
+    gv_addcscope()
