@@ -11,9 +11,10 @@ let g:conf_dir = ''
 let g:prj_conf_filename = ''
 let g:prj_debug = 0
 
+
 if has("cscope")
     if has("win32")
-	set csprg=C:\mingw\bin\cscope.exe
+	set csprg=$HOME/vimfiles/bundle/gvproj/bin/cscope.exe
     else
 	set csprg=/usr/bin/cscope
     endif
@@ -35,11 +36,11 @@ endif
 " ==========================
 " Load python file
 " ==========================
-if has("win32")
-    pyfile $HOME/vimfiles/bundle/gvproj/plugin/gv_project.py
-else
-    pyfile $HOME/.vim/bundle/gvproj/plugin/gv_project.py
-endif
+"if has("win32")
+"    pyfile $HOME/vimfiles/bundle/gvproj/plugin/gv_project.py
+"else
+"    pyfile $HOME/.vim/bundle/gvproj/plugin/gv_project.py
+"endif
 
 " ===================================
 " FUF
