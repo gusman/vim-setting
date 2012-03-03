@@ -36,11 +36,11 @@ endif
 " ==========================
 " Load python file
 " ==========================
-"if has("win32")
-"    pyfile $HOME/vimfiles/bundle/gvproj/plugin/gv_project.py
-"else
-"    pyfile $HOME/.vim/bundle/gvproj/plugin/gv_project.py
-"endif
+if has("win32")
+    pyfile $HOME/vimfiles/bundle/gvproj/plugin/gv_project.py
+else
+    pyfile $HOME/.vim/bundle/gvproj/plugin/gv_project.py
+endif
 
 " ===================================
 " FUF

@@ -182,7 +182,7 @@ def gv_gencscope():
 
     # if in Linux add reverse database
     if platform.system() == 'Linux':
-        cmd += " -q"
+        cmd += " -q "
 
     cmd += "-i " + srclist + " -f " + cscopeout
     os.system(cmd)
