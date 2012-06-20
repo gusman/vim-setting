@@ -1,7 +1,6 @@
-" ==========================
-" cscope configuration
-" ==========================
-"
+"================================="
+" Global variable
+" ================================"
 let g:prj_name = ''
 let g:ctags_file = ''
 let g:cscope_db = ''
@@ -11,28 +10,6 @@ let g:conf_dir = ''
 let g:prj_conf_filename = ''
 let g:prj_debug = 0
 
-
-if has("cscope")
-    if has("win32")
-	set csprg=$HOME/vimfiles/bundle/gvproj/bin/cscope.exe
-    else
-	set csprg=/usr/bin/cscope
-    endif
-    set csto=0
-    set cst
-    set nocsverb
-
-    "example for cscope scritp
-    " add any database in current directory
-    " if filereadable("cscope.out")
-    "    cs add cscope.out
-    " else add database pointed to by environment
-    " elseif $CSCOPE_DB != ""
-    "    cs add $CSCOPE_DB
-    " endif
-    set csverb
-endif
-
 " ==========================
 " Load python file
 " ==========================
@@ -41,13 +18,6 @@ if has("win32")
 else
     pyfile $HOME/.vim/bundle/gvproj/plugin/gv_project.py
 endif
-
-" ===================================
-" FUF
-" ===================================
-let g:alist = []
-let g:fuf_enumeratingLimit = 25
-let g:fuf_maxMenuWidth = 78 " will be adjusted 
 
 " ===================================
 " Function list

@@ -101,7 +101,6 @@ if has("autocmd")
     \ endif
     augroup END
 
-
     " auto command for FileType tex : wrap and linebreak
     autocmd FileType tex setlocal wrap
     autocmd FileType tex setlocal linebreak
@@ -152,7 +151,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=Envy\ Code\ R:h10:cDEFAULT
+        set guifont=Dina:h9:cDEFAULT
     endif
 endif
 
@@ -259,3 +258,59 @@ let Tlist_Enable_Fold_Column = 0
 
 " default output (if not set, default is dvi)
 " let g:Tex_DefaultTargetFormat = 'pdf'
+
+" ==========================
+" cscope configuration
+" ==========================
+
+if has("cscope")
+    if has("win32")
+	set csprg=$HOME/vimfiles/bundle/gvproj/bin/cscope.exe
+    else
+	set csprg=/usr/bin/cscope
+    endif
+    set csto=0
+    set cst
+    set nocsverb
+
+    "example for cscope scritp
+    " add any database in current directory
+    " if filereadable("cscope.out")
+    "    cs add cscope.out
+    " else add database pointed to by environment
+    " elseif $CSCOPE_DB != ""
+    "    cs add $CSCOPE_DB
+    " endif
+    set csverb
+endif
+
+" ===================================
+" FUF
+" ===================================
+let g:alist = []
+let g:fuf_enumeratingLimit = 25
+let g:fuf_maxMenuWidth = 78 " will be adjusted 
+
+" ==============================================================
+" CTRLP configuration
+" ==============================================================
+" Just search filename
+let g:ctrlp_by_filename = 1
+
+" Use regex for searching
+let g:ctrlp_regexp = 1
+
+" Disable working path feature
+let g:ctrlp_working_path_mode = 0
+
+" No scan for dotfiles or dotfolder
+let g:ctrlp_dotfiles = 0
+  
+" No limit of number scanned files
+let g:ctrlp_max_files = 10000
+
+" Follow symlinks
+let g:ctrlp_follow_symlinks = 1
+
+" Lazy update, update list after 500s
+let g:ctrlp_lazy_update = 500
