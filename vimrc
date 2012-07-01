@@ -72,6 +72,12 @@ set wrapscan                    "searching whole file
 set ic                          "ignore case sensitive
 "set cindent                     "set cindent (c language indentation)
 
+" Set default tab value
+set shiftwidth=4
+set softtabstop=4
+set textwidth=79
+set noexpandtab
+
 " ================================================================
 " Autocommand section
 " ================================================================
@@ -101,27 +107,16 @@ if has("autocmd")
     \ endif
     augroup END
 
+    
     " auto command for FileType tex : wrap and linebreak
     autocmd FileType tex setlocal wrap
     autocmd FileType tex setlocal linebreak
 
     " auto command for c file 
-    autocmd FileType c setlocal tabstop=8
-    autocmd FileType c setlocal shiftwidth=8
-    autocmd FileType c setlocal softtabstop=8
-    autocmd FIleType c setlocal noexpandtab
-
-    " auto command for python file
-    autocmd FileType python setlocal shiftwidth=4
-    autocmd FileType python setlocal softtabstop=4
-    autocmd FileType python setlocal textwidth=79
-    autocmd FIleType python setlocal noexpandtab
-
-    " auto commad for vim file
-    autocmd FileType vim setlocal shiftwidth=4
-    autocmd FileType vim setlocal softtabstop=4
-    autocmd FileType vim setlocal textwidth=79
-    autocmd FIleType vim setlocal noexpandtab
+    autocmd FileType c,cpp,h setlocal tabstop=8
+    autocmd FileType c,cpp,h setlocal shiftwidth=8
+    autocmd FileType c,cpp,h setlocal softtabstop=8
+    autocmd FIleType c,cpp,h setlocal noexpandtab
 
 else
         set autoindent " always set autoindenting on
