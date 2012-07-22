@@ -78,45 +78,75 @@ set softtabstop=4
 set textwidth=79
 set noexpandtab
 
+" -- function for editing 
+let s:mytabsize = 0
+
+" Set to tab to 4
+function! Tab4()
+	setlocal ts=4
+	setlocal sw=4
+	setlocal softtabstop=4
+	setlocal noexpandtab
+	let s:mytabsize=4
+endfunction
+
+" Set to tab to 8
+function! Tab8()
+	setlocal ts=8
+	setlocal sw=8
+	setlocal softtabstop=8
+	setlocal noexpandtab
+	let s:mytabsize=8
+endfunction
+
+" Tab tooggle
+function! TabToogle()
+	if s:mytabsize != 8
+		call Tab8()
+	else
+		call Tab4()
+	endif
+endfunction
+
 " ================================================================
 " Autocommand section
 " ================================================================
 " Only do this part when compiled with support for autocommands.
 " By default autocommand is active
 if has("autocmd")
-    " Use the default filetype settings, so that mail gets 'tw' set to 72,
-    " 'cindent' is on in C files, etc.
-    " Also load indent files, to automatically do language-dependent indenting.
+	" Use the default filetype settings, so that mail gets 'tw' set to 72,
+	" 'cindent' is on in C files, etc.
+	" Also load indent files, to automatically do language-dependent indenting.
 	filetype plugin indent on
 
-    " Put these in an autocmd group, so that we can delete them easily.
-    augroup vimrcEx
-    au!
+	" Put these in an autocmd group, so that we can delete them easily.
+	augroup vimrcEx
+	au!
 
-    " For all text files set 'textwidth' to 78 characters.
-    " autocmd FileType text setlocal textwidth=78
+	" For all text files set 'textwidth' to 78 characters.
+	" autocmd FileType text setlocal textwidth=78
 
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    " Also don't do it when the mark is in the first line, that is the default
-    " position when opening a file.
-    autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-    augroup END
+	" When editing a file, always jump to the last known cursor position.
+	" Don't do it when the position is invalid or when inside an event handler
+	" (happens when dropping a file on gvim).
+	" Also don't do it when the mark is in the first line, that is the default
+	" position when opening a file.
+	autocmd BufReadPost *
+	\ if line("'\"") > 1 && line("'\"") <= line("$") |
+	\   exe "normal! g`\"" |
+	\ endif
+	augroup END
 
-    
-    " auto command for FileType tex : wrap and linebreak
-    autocmd FileType tex setlocal wrap
-    autocmd FileType tex setlocal linebreak
 
-    " auto command for c file 
-    autocmd FileType c,cpp,h setlocal tabstop=8
-    autocmd FileType c,cpp,h setlocal shiftwidth=8
-    autocmd FileType c,cpp,h setlocal softtabstop=8
-    autocmd FIleType c,cpp,h setlocal noexpandtab
+	" auto command for FileType tex : wrap and linebreak
+	autocmd FileType tex setlocal wrap
+	autocmd FileType tex setlocal linebreak
+
+	" auto command for c file 
+	autocmd FileType c,cpp,h call Tab8()
+	" autocmd FileType c,cpp,h setlocal shiftwidth=8
+	" autocmd FileType c,cpp,h setlocal softtabstop=8
+	" autocmd FIleType c,cpp,h setlocal noexpandtab
 
 else
         set autoindent " always set autoindenting on
@@ -146,7 +176,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=Dina:h9:cDEFAULT
+        set guifont=Tamsyn7x14:h8:cDEFAULT
     endif
 endif
 
@@ -158,8 +188,11 @@ endif
 nnoremap <silent> <S-h>     :nohlsearch<CR>
 
 " Paste setting into terminal toggle
-nnoremap <F2>		    :set invpaste?<CR>
-set pastetoggle=<F2>
+nnoremap <F2>				:set invpaste?<CR>
+
+" toggle tabsize
+nnoremap <F3>				:call TabToogle() <CR>
+
 set showmode
 
 " ================================================================
