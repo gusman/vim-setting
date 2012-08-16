@@ -292,11 +292,6 @@ let Tlist_Enable_Fold_Column = 0
 " ==========================
 
 if has("cscope")
-    if has("win32")
-	set csprg=$HOME/vimfiles/bundle/gvproj/bin/cscope.exe
-    else
-	set csprg=/usr/bin/cscope
-    endif
     set csto=0
     set cst
     set nocsverb
@@ -342,3 +337,11 @@ let g:ctrlp_follow_symlinks = 1
 
 " Lazy update, update list after 500s
 let g:ctrlp_lazy_update = 500
+
+" =======================================
+" Grep
+" =======================================
+let Grep_Default_Options = '-nri --include="*.[chS]" --include="*.cpp" --include="*.CPP" --include="*.hpp" --include="*.HPP"' 
+let Grep_Skip_Files = '*.bak *~' 
+let Grep_Skip_Dirs = './.*'
+nnoremap <silent> <leader>g :Grep<CR>
