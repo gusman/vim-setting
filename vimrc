@@ -75,7 +75,8 @@ set ic                          "ignore case sensitive
 " Set default tab value
 set shiftwidth=4
 set softtabstop=4
-set textwidth=79
+
+"set textwidth=79
 set noexpandtab
 
 " -- function for editing 
@@ -86,7 +87,6 @@ function! Tab4()
 	setlocal ts=4
 	setlocal sw=4
 	setlocal softtabstop=4
-	setlocal noexpandtab
 	let s:mytabsize=4
 endfunction
 
@@ -95,7 +95,6 @@ function! Tab8()
 	setlocal ts=8
 	setlocal sw=8
 	setlocal softtabstop=8
-	setlocal noexpandtab
 	let s:mytabsize=8
 endfunction
 
@@ -143,7 +142,7 @@ if has("autocmd")
 	autocmd FileType tex setlocal linebreak
 
 	" auto command for c file 
-	autocmd FileType c,cpp,h call Tab8()
+	autocmd FileType c,cpp,h call Tab4()
 	" autocmd FileType c,cpp,h setlocal shiftwidth=8
 	" autocmd FileType c,cpp,h setlocal softtabstop=8
 	" autocmd FIleType c,cpp,h setlocal noexpandtab
@@ -163,10 +162,7 @@ if has("gui_running")
     " Set line and column number
     " set lines=44 columns=120
 
-    " Color theme for GUI mode
-    color desert
-   
-    " Font selection
+        " Font selection
     if has("gui_gtk2")
         set guifont=Terminus\ 10
     elseif has("gui_photon")
@@ -180,6 +176,9 @@ if has("gui_running")
     endif
 endif
 
+" Color theme for GUI mode
+color desert
+   
 
 " ================================================================
 " Common mapping
@@ -214,14 +213,16 @@ call pathogen#helptags()
 " ================================================================
 " Tab pages mapping
 " ================================================================
+" Insted of using below command please use original
+" gt : Next tab, gT : prev tab, igt : index tab
 " Tab new
-nmap <silent> <S-t>     :tabnew<CR>
+" nmap <silent> <S-t>     :tabnew<CR>
 " Tab next
-nmap <silent> <S-right> :tabn<CR>
+" nmap <silent> <S-right> :tabn<CR>
 " Tab previous
-nmap <silent> <S-left>  :tabp<CR>
+" nmap <silent> <S-left>  :tabp<CR>
 " Tab close
-nmap <silent> <S-q>     :tabc<CR>
+" nmap <silent> <S-q>     :tabc<CR>
 
 " ================================================================
 " NERD Tree key mapping and configuration
@@ -312,7 +313,7 @@ endif
 " ===================================
 let g:alist = []
 let g:fuf_enumeratingLimit = 25
-let g:fuf_maxMenuWidth = 78 " will be adjusted 
+let g:fuf_maxMenuWidth = 180 " will be adjusted 
 
 " ==============================================================
 " CTRLP configuration
