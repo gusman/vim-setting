@@ -142,7 +142,7 @@ if has("autocmd")
 	autocmd FileType tex setlocal linebreak
 
 	" auto command for c file 
-	autocmd FileType c,cpp,h call Tab4()
+	autocmd FileType c,cpp,h call Tab8()
 	" autocmd FileType c,cpp,h setlocal shiftwidth=8
 	" autocmd FileType c,cpp,h setlocal softtabstop=8
 	" autocmd FIleType c,cpp,h setlocal noexpandtab
@@ -164,7 +164,7 @@ if has("gui_running")
 
         " Font selection
     if has("gui_gtk2")
-        set guifont=Terminus\ 10
+        set guifont=Monospace\ 9
     elseif has("gui_photon")
         set guifont=Courier\ New:s11
     elseif has("gui_kde")

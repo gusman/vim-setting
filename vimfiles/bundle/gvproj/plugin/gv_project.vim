@@ -1,14 +1,7 @@
 "================================="
 " Global variable
 " ================================"
-let g:prj_name = ''
-let g:ctags_file = ''
-let g:cscope_db = ''
-let g:src_dir = ''
-let g:gv_dir = ''
-let g:conf_dir = ''
-let g:prj_conf_filename = ''
-let g:prj_debug = 0
+
 
 " ==========================
 " Load python file
@@ -23,11 +16,7 @@ endif
 " Function list
 " ===================================
 function! GV_ProjectInfo()
-    echo "PROJ NAME: " . g:prj_name
-    echo "TAGS FILE: " . g:ctags_file
-    echo "CSCOPE DB: " . g:cscope_db
-    echo "SRC DIR: "   . g:src_dir
-    echo "CONF DIR: "  . g:conf_dir
+    echo "will define"
 endfunction
 
 function! GV_Init()

@@ -6,6 +6,7 @@ import platform
 from os.path import join, getsize
 
 debug = 1
+global_config = {}
 
 def dir_trim(str):
     if 0 == len(str):
@@ -20,98 +21,59 @@ def str_trim(str):
         str = str[:-1]
     return str
   
-def gv_dumptofile(filepath, projectname, \
-                ctagsfile, cscopedb, srcdir, confdir ):
-    if debug == 1:
-        print ">> DUMP to FILE"
-
-    f = open(filepath, 'w')
-    f.write("#PRJN#" + projectname + "#\n" \
-            "#CTAG#" + ctagsfile + "#\n" \
-            "#CSCP#" + cscopedb + "#\n" 
-            "#SRCD#" + srcdir + "#\n" \
-            "#CONF#" + confdir + "#\n" ) 
-    f.close()
-
 def gv_parsefile(filepath):
     if debug == 1:
         print ">> PARSE FILE"
 
-    projectname = ''
-    ctagsfile = ''
-    cscopedb = ''
-    srcdir = ''
-    confdir = ''
-
-    rmod = -1
+    global global_config
     tmp = ''
+    project_name = ''
+    confdir = ''
+    srcdir = []
 
     f = open(filepath, 'r')
-    while True:
-        c = f.read(1)
-        if (0 == len(c)):
-            break
 
-        if '#' != c:
-	    if 1 == rmod: projectname += c
-            elif 2 == rmod: ctagsfile += c
-            elif 3 == rmod: cscopedb += c
-            elif 4 == rmod: srcdir += c
-            elif 5 == rmod: confdir += c
-            elif 0 == rmod: tmp += c
-        else:
-            if 'PRJN' == tmp: rmod = 1
-            elif 'CTAG' == tmp: rmod = 2
-            elif 'CSCP' == tmp: rmod = 3
-            elif 'SRCD' == tmp: rmod = 4
-            elif 'CONF' == tmp: rmod = 5
-            else: rmod = 0
-            tmp = ''
+    while True:
+	tmp = f.readline()
+
+	if "#1" == tmp[0:2]:
+	    projectname = f.readline()
+	    projectname = projectname[0:len(projectname)-1] 
+
+	elif "#2" == tmp[0:2]:
+	    confdir = f.readline()
+	    confdir = confdir[0:len(confdir)-1]
+
+	elif '>' == tmp[0]:
+	    srcdir.append(tmp[1:len(tmp)-1])
+	    continue
+
+	elif "#EOF" == tmp[0:4]:
+	    break;
 
     f.close()
-    lval = [projectname, ctagsfile, cscopedb, srcdir, confdir]
-    return lval
+    ctagsfile = confdir + "/tags"
+    cscopedb  = confdir + "/cscope.out"
+
+    global_config['PROJECT_NAME'] = project_name
+    global_config['CONF_DIR'] = confdir
+    global_config['SRC_DIR'] = srcdir
+    global_config['CTAGS_FILE'] = ctagsfile
+    global_config['CSCOPE_DB'] = cscopedb
+    #print global_config
 
 def gv_getconfig(filepath):
     if debug == 1:
         print ">> GET CONFIG"
-
-    lval = gv_parsefile(filepath)
-    vim.command("let g:prj_name = '" + lval[0] + "'")
-    vim.command("let g:ctags_file = '" + lval[1] + "'")
-    vim.command("let g:cscope_db = '" + lval[2] + "'")
-    vim.command("let g:src_dir = '" + lval[3] + "'")
-    vim.command("let g:conf_dir = '" + lval[4] + "'");
-
-def gv_saveconfig():
-    if debug == 1:
-        print ">> SAVE CONFIG"
-
-    filepath = vim.eval("g:prj_conf_filename")
-    projectname = vim.eval("g:prj_name")
-    ctagsfile = vim.eval("g:ctags_file")
-    cscopedb = vim.eval("g:cscope_db")
-    srcdir = vim.eval("g:src_dir")
-    confdir = vim.eval("g:conf_dir")
-
-    gv_dumptofile(filepath, projectname, ctagsfile, \
-                cscopedb, srcdir, confdir)
-
-def gv_collectsrc():
-    confdir = vim.eval("g:conf_dir")
-    srcdir = vim.eval("g:src_dir")
-    confdir = dir_trim(confdir)
-    srclist = confdir + "project.files"
-
-    if not os.path.isdir(confdir):
-        print confdir + ": NOT EXIST"
-        return
-
-    # generate cscope files
-    f = open(srclist, 'w') 
-    for root, dirs, files in os.walk(srcdir, followlinks=True):
+    
+    global global_config
+    gv_parsefile(filepath)
+  
+def gv_writelist(fobj, srcdir):
+     for root, dirs, files in os.walk(srcdir, followlinks=True):
         for name in files:
             iswrite = 0;
+
             ext1 = name[len(name)-2:len(name)]
             ext2 = name[len(name)-4:len(name)]
             
@@ -125,14 +87,38 @@ def gv_collectsrc():
             if iswrite:
                 filename = root + '/' + name +"\n"
                 #print filename[:len(filename)-1]
-                f.write(filename)
+                fobj.write(filename)
+
+def gv_collectsrc():
+    global global_config
+    
+    srcdir = []
+    confdir = global_config['CONF_DIR']
+    srcdir = global_config['SRC_DIR']
+    confdir = dir_trim(confdir)
+    srclist = confdir + "project.files"
+
+    if not os.path.isdir(confdir):
+        print confdir + ": NOT EXIST"
+        return
+
+    # generate list of files
+    f = open(srclist, 'w') 
+
+    for item_dir in srcdir:
+	if not os.path.isdir(item_dir):
+	    continue
+	gv_writelist(f, item_dir);
+
     f.close()
 
 def gv_gentags():
     if debug == 1:
         print ">> GEN TAGS"
 
-    confdir = vim.eval("g:conf_dir")
+    global global_config
+
+    confdir = global_config['CONF_DIR']
     confdir = dir_trim(confdir)
     srclist = confdir + "project.files"
 
@@ -140,8 +126,7 @@ def gv_gentags():
 	print srclist + " NOT EXIST"
 	return 
 
-    ctagsfile = vim.eval("g:ctags_file")
-    srcdir = vim.eval("g:src_dir")
+    ctagsfile = global_config['CTAGS_FILE']
     cmd = "ctags -V --c++-kinds=+p --fields=+iaS --extra=+q " + \
 	  " -o " + ctagsfile +  " -L " + srclist
     os.system(cmd)
@@ -149,14 +134,16 @@ def gv_gentags():
 def gv_settags():
     if debug == 1:
         print ">> SET TAGS"
+    
+    global global_config
 
-    ctagsfile = vim.eval("g:ctags_file")
+    ctagsfile = global_config['CTAGS_FILE']
     if not os.path.isfile(ctagsfile):
         print "CTAGS FILE: " + ctagsfile + " -> Not exist!"
         return
 
-    # I don't know, why the command must be in variable
-    # If not in variable, command will not run properly
+    # I don't know, why the command must be a variable
+    # If it is not a variable, command will not run properly
     cmd = "set tags=" + ctagsfile   
     print cmd
     vim.command(cmd)
@@ -168,7 +155,9 @@ def gv_updatetags():
     gv_settags()
 
 def gv_gencscope():
-    confdir = vim.eval("g:conf_dir")
+    global global_config
+
+    confdir = global_config['CONF_DIR']
     confdir = dir_trim(confdir)
     srclist  = confdir + "project.files"
     cscopeout = confdir + "cscope.out"
@@ -180,7 +169,7 @@ def gv_gencscope():
     # generate cscope database
     cmd = "cscope -b -k -v "
 
-    # if in Linux add reverse database
+    # if on Linux add reverse database
     if platform.system() == 'Linux':
         cmd += " -q "
 
@@ -188,7 +177,9 @@ def gv_gencscope():
     os.system(cmd)
 
 def gv_addcscope():
-    cscopedb = vim.eval("g:cscope_db")
+    global global_config
+
+    cscopedb = global_config['CSCOPE_DB']
     if os.path.isfile(cscopedb):
         cmd = "cs add " + cscopedb
         vim.command(cmd)
@@ -196,8 +187,9 @@ def gv_addcscope():
         print "CSCOPE DB FILE NOT EXIST"
 
 def gv_loadlist():
-    confdir = vim.eval("g:conf_dir")
-    srcdir = vim.eval("g:src_dir")
+    global global_config
+
+    confdir = global_config['CONF_DIR']
     confdir = dir_trim(confdir)
     cscopefile = confdir + "project.files"
 
