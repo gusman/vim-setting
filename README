@@ -2,3 +2,8 @@ Requirements:
 1. Python
 2. Git
 
+Install
+$ git clone https://github.com/gusman/vim-setting.git ./vim/bundle/vim-setting
+$ cd .vim/bundle/vim-setting
+$ sh setup.sh
+
