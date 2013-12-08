@@ -361,14 +361,14 @@ let g:ctrlp_max_files = 50000
 " Follow symlinks
 let g:ctrlp_follow_symlinks = 1
 
-" Lazy update, update list after 500s
-let g:ctrlp_lazy_update = 500
+" Lazy update, update list after 100s
+let g:ctrlp_lazy_update = 100
 
 " Custom list based on file list
 if has("win32")
-    let g:ctrlp_user_command = ['.gvproj/project.files', 'type %s/.gvproj/project.files']
+    let g:ctrlp_user_command = [getcwd().'.gvproj/project.files', 'type %s/'.getcwd().'.gvproj/project.files']
 else
-    let g:ctrlp_user_command = ['.gvproj/project.files', 'cat %s/.gvproj/project.files']
+    let g:ctrlp_user_command = [getcwd().'.gvproj/project.files', 'cat %s/'.getcwd().'.gvproj/project.files']
 endif
 
 let g:ctrlp_max_height = 25
