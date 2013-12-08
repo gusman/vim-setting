@@ -197,8 +197,8 @@ set showmode
 " ================================================================
 " Pathogen
 " ================================================================
-call pathogen#infect()
-call pathogen#helptags()
+" call pathogen#infect()
+" call pathogen#helptags()
 
 " ================================================================
 " Visual mode mapping
@@ -224,6 +224,31 @@ call pathogen#helptags()
 " Tab close
 " nmap <silent> <S-q>     :tabc<CR>
 
+
+" ================================================================
+" Vundle setting
+" ===============================================================
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+
+" original repos on github
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'scrooloose/nerdtree.git'
+Bundle 'kien/ctrlp.vim'
+Bundle 'ervandew/supertab'
+Bundle 'vim-scripts/OmniCppComplete'
+Bundle 'chazy/cscope_maps'
+Bundle 'majutsushi/tagbar'
+Bundle 'vim-scripts/EasyGrep'
+Bundle 'gusman/vim-setting'
+
+
 " ================================================================
 " NERD Tree key mapping and configuration
 " ================================================================
@@ -241,14 +266,14 @@ let NERDTreeWinPos = "right"
 " Taglist mapping (taglist plugin)
 " ================================================================
 " Togle taglist menu
-nnoremap <silent> <F8>      :TlistToggle<CR>
+" nnoremap <silent> <F8>      :TlistToggle<CR>
 
 " Displaying tags for only one file~
-let Tlist_Show_One_File = 1
+" let Tlist_Show_One_File = 1
 " If you are the last, kill yourself
-let Tlist_Exist_OnlyWindow = 1
+" let Tlist_Exist_OnlyWindow = 1
 " Split to the right side of the screen
-let Tlist_Use_Right_Window = 0
+" let Tlist_Use_Right_Window = 0
 " Sort by order or name
 " let Tlist_Sort_Type = "order"
 " Do not show prototypes and not tags in the taglist window.
@@ -256,13 +281,13 @@ let Tlist_Use_Right_Window = 0
 " Remove extra information and blank lines from the taglist window.
 " let Tlist_Compart_Format = 1
 " Jump to taglist window on open.
-let Tlist_GainFocus_On_ToggleOpen = 1
+" let Tlist_GainFocus_On_ToggleOpen = 1
 " Show tag scope next to the tag name.
-let Tlist_Display_Tag_Scope = 1
+" let Tlist_Display_Tag_Scope = 1
 " Close the taglist window when a file or tag is selected.
-let Tlist_Close_On_Select = 1
+" let Tlist_Close_On_Select = 1
 " Don't Show the fold indicator column in the taglist window.
-let Tlist_Enable_Fold_Column = 0
+" let Tlist_Enable_Fold_Column = 0
 " Tlist Window's width
 " let Tlist_WinWidth = 40
 
@@ -311,9 +336,9 @@ endif
 " ===================================
 " FUF
 " ===================================
-let g:alist = []
-let g:fuf_enumeratingLimit = 25
-let g:fuf_maxMenuWidth = 180 " will be adjusted 
+" let g:alist = []
+" let g:fuf_enumeratingLimit = 25
+" let g:fuf_maxMenuWidth = 180 " will be adjusted 
 
 " ==============================================================
 " CTRLP configuration
@@ -347,10 +372,14 @@ else
 endif
 
 let g:ctrlp_max_height = 25
+
 " =======================================
 " Grep
 " =======================================
-let Grep_Default_Options = '-nri --include="*.[chS]" --include="*.cpp" --include="*.CPP" --include="*.hpp" --include="*.HPP"' 
-let Grep_Skip_Files = '*.bak *~' 
-let Grep_Skip_Dirs = './.*'
-nnoremap <silent> <leader>g :Grep<CR>
+" let Grep_Default_Options = '-nri --include="*.[chS]" --include="*.cpp" --include="*.CPP" --include="*.hpp" --include="*.HPP"' 
+" let Grep_Skip_Files = '*.bak *~' 
+" let Grep_Skip_Dirs = './.*'
+" nnoremap <silent> <leader>g :Grep<CR>
+
+
+

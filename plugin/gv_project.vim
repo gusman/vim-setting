@@ -36,15 +36,16 @@ function! GV_GenCtags()
     py gv_gentags()
 endfunction
 
-function! GV_FUFList()
-    call fuf#givenfile#launch('', 1, 'PRJ>', g:alist)
-endfunction
+" function! GV_FUFList()
+"    call fuf#givenfile#launch('', 1, 'PRJ>', g:alist)
+" endfunction
+
 
 " ========================
 " Key mapping
 " ========================
-nmap <F6>  : FufRenewCache<CR>
-nmap <F7>  : call GV_FUFList()<CR> 
+" nmap <F6>  : FufRenewCache<CR>
+" nmap <F7>  : call GV_FUFList()<CR> 
 " <F8> : already used in vimrc for taglist toggle
 " <F9> : already used in vimrc for NERDTree toggle
 nmap <F10> : call GV_Load()<CR> 
