@@ -180,6 +180,7 @@ endif
 color desert
    
 
+
 " ================================================================
 " Common mapping
 " ================================================================
@@ -245,8 +246,8 @@ Bundle 'ervandew/supertab'
 Bundle 'vim-scripts/OmniCppComplete'
 Bundle 'chazy/cscope_maps'
 Bundle 'majutsushi/tagbar'
-Bundle 'vim-scripts/EasyGrep'
 Bundle 'gusman/vim-setting'
+Bundle 'vim-scripts/grep.vim'
 
 
 " ================================================================
@@ -257,11 +258,11 @@ nnoremap <silent> <F9>	:NERDTreeToggle<CR>
 " Quite when enter file "
 let NERDTreeQuitOnOpen = 1
 " Show bookmarks "
-let NERDTreeShowBookmars = 1
+"let NERDTreeShowBookmars = 1
 " Set win pos at right"
 let NERDTreeWinPos = "right"
-
-
+" Don't use fancy arrow to avoid garbage display
+let g:NERDTreeDirArrows=0
 " ================================================================
 " Taglist mapping (taglist plugin)
 " ================================================================
@@ -376,10 +377,16 @@ let g:ctrlp_max_height = 25
 " =======================================
 " Grep
 " =======================================
-" let Grep_Default_Options = '-nri --include="*.[chS]" --include="*.cpp" --include="*.CPP" --include="*.hpp" --include="*.HPP"' 
-" let Grep_Skip_Files = '*.bak *~' 
-" let Grep_Skip_Dirs = './.*'
-" nnoremap <silent> <leader>g :Grep<CR>
+let Grep_Default_Options = '-nri --include="*.[chS]" --include="*.cpp" --include="*.CPP" --include="*.hpp" --include="*.HPP"' 
+let Grep_Skip_Files = '*.bak *~' 
+let Grep_Skip_Dirs = './.*'
+nnoremap <silent> <leader>g :Grep<CR>
 
+
+" =======================================
+" Tagbar
+" =======================================
+let g:tagbar_left = 1
+nnoremap <silent> <F8>      :TagbarToggle<CR>
 
 

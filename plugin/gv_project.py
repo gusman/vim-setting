@@ -186,35 +186,36 @@ def gv_addcscope():
     else:
         print "CSCOPE DB FILE NOT EXIST"
 
-def gv_loadlist():
-    global global_config
-
-    confdir = global_config['CONF_DIR']
-    confdir = dir_trim(confdir)
-    cscopefile = confdir + "project.files"
-
-    if not os.path.isfile(cscopefile) :
-        print confdir + ": NOT EXIST"
-        return
-
-    print "Loading file"
-
-    # generate cscope files
-    f = open(cscopefile, 'r') 
-    while True:
-	path = f.readline()
-	if (0 == len(path)):
-	    break;
-	path = path[0:len(path) - 1]
-	if platform.system() == 'Linux':
-	    cmd = "call add(g:alist,\"" + path + "\")"
-	else:
-	    cmd = "call add(g:alist,'" + path + "')"
-	vim.command(cmd)
-
-    print "Finish"
-
-    f.close()
+# // disable loadlist since using ctrlp
+#def gv_loadlist():
+#    global global_config
+#
+#    confdir = global_config['CONF_DIR']
+#    confdir = dir_trim(confdir)
+#    cscopefile = confdir + "project.files"
+#
+#    if not os.path.isfile(cscopefile) :
+#        print confdir + ": NOT EXIST"
+#        return
+#
+#    print "Loading file"
+#
+#    # generate cscope files
+#    f = open(cscopefile, 'r') 
+#    while True:
+#	path = f.readline()
+#	if (0 == len(path)):
+#	    break;
+#	path = path[0:len(path) - 1]
+#	if platform.system() == 'Linux':
+#	    cmd = "call add(g:alist,\"" + path + "\")"
+#	else:
+#	    cmd = "call add(g:alist,'" + path + "')"
+#	vim.command(cmd)
+#
+#    print "Finish"
+#
+#    f.close()
 
 def gv_load(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
@@ -224,7 +225,7 @@ def gv_load(prjconf=".gvproj/prj.conf"):
     gv_getconfig(prjconf)
     gv_settags()
     gv_addcscope()
-    gv_loadlist()
+    #gv_loadlist()
 
 def gv_init(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
@@ -233,7 +234,7 @@ def gv_init(prjconf=".gvproj/prj.conf"):
 
     gv_getconfig(prjconf) 
     gv_collectsrc()
-    gv_loadlist()
+    #gv_loadlist()
     gv_gentags()
     gv_gencscope()
     gv_settags()
