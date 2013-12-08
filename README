@@ -1,37 +1,4 @@
-This project to create a vim scritp to make some feature in source insight in vim.
-This porject create using:
-- Python script
-- Vim script
-
-extenal plugin should included
-1. Omnicpp completion
-2. Taglist
-3. NerdTree
-4. Cscope Map
-
-TODO:
-=========
-
-Feature:
-- Create new project
-- Load existing project
-- Update CTAGS
-- Update CSCOPE
-- Generate CTAGS
-- Generate CSCOPE
-
-Scenario:
-- Create Project
-	1. Input project name
-	2. Input src project dir
-	3. Make folder in $HOME/.gvproj and named it with project name
-	4. New created folder is used for project information
-	5. Dump all file configuration itu proj
-
-	
-- Generate tags
-	1. Generate tags by project source directory
-	2. Put tags file in $HOME/.gvproj/<proj name>/tags
-	3. Execute set tags vim command
-	
+Requirements:
+1. Python
+2. Git
 
