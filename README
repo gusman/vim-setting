@@ -7,3 +7,6 @@ $ git clone https://github.com/gusman/vim-setting.git ./vim/bundle/vim-setting
 $ cd .vim/bundle/vim-setting
 $ sh setup.sh
 
+open vim and run below command
+:BundleInstall
+
