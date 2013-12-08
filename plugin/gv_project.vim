@@ -7,9 +7,9 @@
 " Load python file
 " ==========================
 if has("win32")
-    pyfile $HOME/vimfiles/bundle/gvproj/plugin/gv_project.py
+    pyfile $HOME/vimfiles/bundle/vim-setting/plugin/gv_project.py
 else
-    pyfile $HOME/.vim/bundle/gvproj/plugin/gv_project.py
+    pyfile $HOME/.vim/bundle/vim-setting/plugin/gv_project.py
 endif
 
 " ===================================

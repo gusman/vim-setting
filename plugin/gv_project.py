@@ -127,7 +127,7 @@ def gv_gentags():
 	return 
 
     ctagsfile = global_config['CTAGS_FILE']
-    cmd = "ctags -V --c++-kinds=+p --fields=+iaS --extra=+q " + \
+    cmd = "ctags -V --c-kinds=+p --c++-kinds=+p --fields=+iaSl --extra=+q " + \
 	  " -o " + ctagsfile +  " -L " + srclist
     os.system(cmd)
 
