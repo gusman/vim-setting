@@ -367,9 +367,9 @@ let g:ctrlp_lazy_update = 100
 
 " Custom list based on file list
 if has("win32")
-    let g:ctrlp_user_command = [getcwd().'.gvproj/project.files', 'type %s/'.getcwd().'.gvproj/project.files']
+    let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'type %s/'.'/.gvproj/project.files']
 else
-    let g:ctrlp_user_command = [getcwd().'.gvproj/project.files', 'cat %s/'.getcwd().'.gvproj/project.files']
+    let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'cat %s/'.'/.gvproj/project.files']
 endif
 
 let g:ctrlp_max_height = 25
