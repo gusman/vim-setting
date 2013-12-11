@@ -58,6 +58,8 @@ set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,
 " Turn on wild mode huge list
 set wildmode=list:longest
 
+" Enable insert paset
+set paste
 
 " ================================================================
 " Editing
@@ -142,7 +144,7 @@ if has("autocmd")
 	autocmd FileType tex setlocal linebreak
 
 	" auto command for c file 
-	autocmd FileType c,cpp,h call Tab8()
+	autocmd FileType c,cpp,h call Tab4()
 	" autocmd FileType c,cpp,h setlocal shiftwidth=8
 	" autocmd FileType c,cpp,h setlocal softtabstop=8
 	" autocmd FIleType c,cpp,h setlocal noexpandtab
@@ -186,9 +188,6 @@ color desert
 " ================================================================
 " Search hilight turn off key
 nnoremap <silent> <S-h>     :nohlsearch<CR>
-
-" Paste setting into terminal toggle
-nnoremap <F2>				:set invpaste?<CR>
 
 " toggle tabsize
 nnoremap <F3>				:call TabToogle() <CR>

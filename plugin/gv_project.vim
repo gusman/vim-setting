@@ -51,4 +51,3 @@ endfunction
 nmap <F10> : call GV_Load()<CR> 
 nmap <F11> : call GV_GenCtags()<CR>
 nmap <F12> : call GV_GenCscope() <CR>
-
