@@ -58,9 +58,6 @@ set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,
 " Turn on wild mode huge list
 set wildmode=list:longest
 
-" Enable insert paset
-set paste
-
 " ================================================================
 " Editing
 " ================================================================
@@ -190,7 +187,10 @@ color desert
 nnoremap <silent> <S-h>     :nohlsearch<CR>
 
 " toggle tabsize
-nnoremap <F3>				:call TabToogle() <CR>
+nnoremap <F3>	:call TabToogle() <CR>
+
+" toggle paste in insert on/off
+set pastetoggle=<F2>
 
 set showmode
 
