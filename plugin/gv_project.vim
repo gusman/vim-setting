@@ -36,6 +36,10 @@ function! GV_GenCtags()
     py gv_gentags()
 endfunction
 
+function! GV_AddUpdate()
+    py gv_add_task()
+endfunction
+
 " function! GV_FUFList()
 "    call fuf#givenfile#launch('', 1, 'PRJ>', g:alist)
 " endfunction
@@ -51,3 +55,15 @@ endfunction
 nmap <F10> : call GV_Load()<CR> 
 nmap <F11> : call GV_GenCtags()<CR>
 nmap <F12> : call GV_GenCscope() <CR>
+
+" =======================
+" Event driven action
+" =======================
+if has("autocmd")
+    " Is filetype auto sensitive
+    autocmd BufWritePost *.[chCH]	: call GV_AddUpdate() " C files
+    autocmd BufWritePost *.[ch]pp	: call GV_AddUpdate() " cpp files lower case
+    autocmd BufWritePost *.[CH]PP	: call GV_AddUpdate() " cpp files upper case
+endif
+    
+

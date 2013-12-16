@@ -161,7 +161,7 @@ if has("gui_running")
     " Set line and column number
     " set lines=44 columns=120
 
-        " Font selection
+    " Font selection
     if has("gui_gtk2")
         set guifont=Monospace\ 9
     elseif has("gui_photon")
@@ -368,7 +368,8 @@ let g:ctrlp_lazy_update = 100
 if has("win32")
     let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'type %s/'.'/.gvproj/project.files']
 else
-    let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'cat %s/'.'/.gvproj/project.files']
+    "let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'cat %s/'.'/.gvproj/project.files']
+    let g:ctrlp_user_command = 'cat %s/.gvproj/project.files'
 endif
 
 let g:ctrlp_max_height = 25

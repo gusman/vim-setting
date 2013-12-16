@@ -3,10 +3,15 @@
 import os
 import vim
 import platform
+import thread
+import time
+import subprocess
+import Queue
 from os.path import join, getsize
 
-debug = 1
+debug = True
 global_config = {}
+q_update = Queue.Queue(2)
 
 def dir_trim(str):
     if 0 == len(str):
@@ -22,7 +27,7 @@ def str_trim(str):
     return str
   
 def gv_parsefile(filepath):
-    if debug == 1:
+    if debug == True:
         print ">> PARSE FILE"
 
     global global_config
@@ -63,7 +68,7 @@ def gv_parsefile(filepath):
     #print global_config
 
 def gv_getconfig(filepath):
-    if debug == 1:
+    if debug == True:
         print ">> GET CONFIG"
     
     global global_config
@@ -112,8 +117,8 @@ def gv_collectsrc():
 
     f.close()
 
-def gv_gentags():
-    if debug == 1:
+def gv_gentags(verbose = True):
+    if True == debug and True == verbose:
         print ">> GEN TAGS"
 
     global global_config
@@ -127,12 +132,19 @@ def gv_gentags():
 	return 
 
     ctagsfile = global_config['CTAGS_FILE']
-    cmd = "ctags -V --c-kinds=+p --c++-kinds=+p --fields=+iaSl --extra=+q " + \
+    cmd = "ctags " 
+    
+    if True == verbose:
+	cmd += " -V "
+    
+    cmd += " --c-kinds=+p --c++-kinds=+p --fields=+iaSl --extra=+q " + \
 	  " -o " + ctagsfile +  " -L " + srclist
-    os.system(cmd)
+
+    #os.system(cmd)
+    subprocess.call(cmd, shell = True)
 
 def gv_settags():
-    if debug == 1:
+    if debug == True:
         print ">> SET TAGS"
     
     global global_config
@@ -149,12 +161,12 @@ def gv_settags():
     vim.command(cmd)
 
 def gv_updatetags():
-    if debug == 1:
+    if debug == True:
         print ">> UDPATE TAGS"
     gv_gentags()
     gv_settags()
 
-def gv_gencscope():
+def gv_gencscope(verbose = True):
     global global_config
 
     confdir = global_config['CONF_DIR']
@@ -167,14 +179,18 @@ def gv_gencscope():
 	return 
 
     # generate cscope database
-    cmd = "cscope -b -k -v "
+    cmd = "cscope -b -k "
+
+    if True == verbose:
+	cmd += " -v "
 
     # if on Linux add reverse database
     if platform.system() == 'Linux':
         cmd += " -q "
 
     cmd += "-i " + srclist + " -f " + cscopeout
-    os.system(cmd)
+    #os.system(cmd)
+    subprocess.call(cmd, shell = True)
 
 def gv_addcscope():
     global global_config
@@ -185,6 +201,33 @@ def gv_addcscope():
         vim.command(cmd)
     else:
         print "CSCOPE DB FILE NOT EXIST"
+
+def gv_bg_update(delay):
+    while True:
+	if False == q_update.empty():
+	    print "Updating start"
+	    q_update.get()
+	    #time.sleep(delay)
+	    gv_gentags(False)
+	    gv_gencscope(False)
+	    vim.command("silent! cs reset")
+	    #gv_addcscope()
+	    q_update.task_done()
+	    print "Updating done"
+
+def gv_thrd_start():
+    try:
+	thread.start_new_thread(gv_bg_update, (7,))
+    except:
+	print "Error: unable to start thread"
+
+def gv_add_task():
+    if False == q_update.full():
+	q_update.put_nowait(1)
+    else:
+	print "Queue FULL!"
+
+
 
 # // disable loadlist since using ctrlp
 #def gv_loadlist():
@@ -226,6 +269,7 @@ def gv_load(prjconf=".gvproj/prj.conf"):
     gv_settags()
     gv_addcscope()
     #gv_loadlist()
+    gv_thrd_start()
 
 def gv_init(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
@@ -239,3 +283,4 @@ def gv_init(prjconf=".gvproj/prj.conf"):
     gv_gencscope()
     gv_settags()
     gv_addcscope()
+    gv_thrd_start()
