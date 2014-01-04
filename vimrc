@@ -163,7 +163,7 @@ if has("gui_running")
 
     " Font selection
     if has("gui_gtk2")
-        set guifont=Monospace\ 9
+        set guifont=Fixed\ 10
     elseif has("gui_photon")
         set guifont=Courier\ New:s11
     elseif has("gui_kde")
@@ -387,6 +387,7 @@ nnoremap <silent> <leader>g :Grep<CR>
 " Tagbar
 " =======================================
 let g:tagbar_left = 1
+let g:tagbar_autoclose = 1
 nnoremap <silent> <F8>      :TagbarToggle<CR>
 
 
