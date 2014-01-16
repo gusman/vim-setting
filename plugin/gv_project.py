@@ -264,7 +264,7 @@ def gv_load(prjconf=".gvproj/prj.conf"):
     gv_addcscope()
     #gv_loadlist()
 
-    # Ini thread
+    # Init thread
     global global_timer
     if None == global_timer:
 	global_timer = threading.Timer(3, gv_bg_update)
