@@ -175,11 +175,6 @@ if has("gui_running")
     endif
 endif
 
-" Color theme for GUI mode
-color desert
-   
-
-
 " ================================================================
 " Common mapping
 " ================================================================
