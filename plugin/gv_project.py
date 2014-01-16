@@ -3,7 +3,7 @@
 import os
 import vim
 import platform
-import thread
+import threading
 import time
 import subprocess
 import Queue
@@ -11,7 +11,8 @@ from os.path import join, getsize
 
 debug = True
 global_config = {}
-q_update = Queue.Queue(2)
+global_timer = None
+global_lock = threading.Lock()
 
 def dir_trim(str):
     if 0 == len(str):
@@ -202,30 +203,23 @@ def gv_addcscope():
     else:
         print "CSCOPE DB FILE NOT EXIST"
 
-def gv_bg_update(delay):
-    while True:
-	if False == q_update.empty():
-	    print "Updating start"
-	    q_update.get()
-	    #time.sleep(delay)
-	    gv_gentags(False)
-	    gv_gencscope(False)
-	    vim.command("silent! cs reset")
-	    #gv_addcscope()
-	    q_update.task_done()
-	    print "Updating done"
-
-def gv_thrd_start():
-    try:
-	thread.start_new_thread(gv_bg_update, (7,))
-    except:
-	print "Error: unable to start thread"
+def gv_bg_update():
+    global global_lock
+    global_lock.acquire()
+    gv_gentags(False)
+    gv_gencscope(False)
+    vim.command("silent! cs reset")
+    print "Updating done"
+    global_lock.release()
 
 def gv_add_task():
-    if False == q_update.full():
-	q_update.put_nowait(1)
-    else:
-	print "Queue FULL!"
+    global global_timer
+    if True == global_timer.isAlive():
+	global_timer.cancel()
+
+
+    global_timer = threading.Timer(3, gv_bg_update)
+    global_timer.start()
 
 
 
@@ -269,7 +263,12 @@ def gv_load(prjconf=".gvproj/prj.conf"):
     gv_settags()
     gv_addcscope()
     #gv_loadlist()
-    gv_thrd_start()
+
+    # Ini thread
+    global global_timer
+    if None == global_timer:
+	global_timer = threading.Timer(3, gv_bg_update)
+	global_timer.start()
 
 def gv_init(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
