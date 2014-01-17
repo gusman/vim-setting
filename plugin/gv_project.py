@@ -282,4 +282,4 @@ def gv_init(prjconf=".gvproj/prj.conf"):
     gv_gencscope()
     gv_settags()
     gv_addcscope()
-    gv_thrd_start()
+
