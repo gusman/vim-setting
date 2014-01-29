@@ -24,6 +24,7 @@ set title
 
 " Show the command being typed
 set showcmd
+
 " Show matching brackets
 set showmatch
 
@@ -60,6 +61,9 @@ set wildmode=list:longest
 
 " Show line on column 80
 set colorcolumn=80
+
+" File format setting
+set fileformats=unix,dos,mac
 
 " ================================================================
 " Editing
