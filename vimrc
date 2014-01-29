@@ -58,6 +58,9 @@ set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,
 " Turn on wild mode huge list
 set wildmode=list:longest
 
+" Show line on column 80
+set colorcolumn=80
+
 " ================================================================
 " Editing
 " ================================================================
