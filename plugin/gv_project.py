@@ -10,6 +10,7 @@ import Queue
 from os.path import join, getsize
 
 debug = True
+global_devmode = False
 global_config = {}
 global_timer = None
 global_lock = threading.Lock()
@@ -175,6 +176,7 @@ def gv_gencscope(verbose = True):
     srclist  = confdir + "project.files"
     cscopeout = confdir + "cscope.out"
 
+    gv_collectsrc()
     if not os.path.isfile(srclist):
 	print srclist + " NOT EXIST"
 	return 
@@ -212,17 +214,6 @@ def gv_bg_update():
     print "Updating done"
     global_lock.release()
 
-def gv_add_task():
-    global global_timer
-    if True == global_timer.isAlive():
-	global_timer.cancel()
-
-
-    global_timer = threading.Timer(3, gv_bg_update)
-    global_timer.start()
-
-
-
 # // disable loadlist since using ctrlp
 #def gv_loadlist():
 #    global global_config
@@ -254,6 +245,21 @@ def gv_add_task():
 #
 #    f.close()
 
+def gv_activate_timer():
+    global global_devmode
+
+    if True == global_devmode:
+	global global_timer
+
+	if not(None == global_timer) and global_timer.isAlive():
+	    global_timer.cancel()
+
+	global_timer = threading.Timer(3, gv_bg_update)
+	global_timer.start()
+    
+def gv_add_task():
+    gv_activate_timer()
+
 def gv_load(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
         print prjconf + ": NOT EXIST!"
@@ -263,12 +269,8 @@ def gv_load(prjconf=".gvproj/prj.conf"):
     gv_settags()
     gv_addcscope()
     #gv_loadlist()
-
-    # Init thread
-    global global_timer
-    if None == global_timer:
-	global_timer = threading.Timer(3, gv_bg_update)
-	global_timer.start()
+    global global_devmode
+    global_devmode = True
 
 def gv_init(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
@@ -282,4 +284,7 @@ def gv_init(prjconf=".gvproj/prj.conf"):
     gv_gencscope()
     gv_settags()
     gv_addcscope()
+
+    global global_devmode
+    global_devmode = True
 
