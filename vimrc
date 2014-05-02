@@ -60,7 +60,9 @@ set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,
 set wildmode=list:longest
 
 " Show line on column 80
-set colorcolumn=80
+if version >= 703
+	set colorcolumn=80
+endif
 
 " File format setting
 set fileformats=unix,dos,mac
