@@ -260,6 +260,15 @@ def gv_activate_timer():
 def gv_add_task():
     gv_activate_timer()
 
+def gv_set_bookmark_file():
+    global global_config
+    confdir = global_config['CONF_DIR']
+    confdir = dir_trim(confdir)
+    cmd = "let g:simple_bookmarks_filename = "
+    cmd += "'" + confdir + "vim_bookmark" + "'"
+    print cmd
+    vim.command(cmd)
+
 def gv_load(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
         print prjconf + ": NOT EXIST!"
@@ -268,6 +277,7 @@ def gv_load(prjconf=".gvproj/prj.conf"):
     gv_getconfig(prjconf)
     gv_settags()
     gv_addcscope()
+    gv_set_bookmark_file()
     #gv_loadlist()
     global global_devmode
     global_devmode = True
@@ -284,6 +294,7 @@ def gv_init(prjconf=".gvproj/prj.conf"):
     gv_gencscope()
     gv_settags()
     gv_addcscope()
+    gv_set_bookmark_file()
 
     global global_devmode
     global_devmode = True

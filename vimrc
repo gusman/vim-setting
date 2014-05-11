@@ -251,6 +251,7 @@ Bundle 'chazy/cscope_maps'
 Bundle 'majutsushi/tagbar'
 Bundle 'gusman/vim-setting'
 Bundle 'vim-scripts/grep.vim'
+Bundle 'AndrewRadev/simple_bookmarks.vim'
 
 
 " ================================================================
@@ -393,5 +394,10 @@ nnoremap <silent> <leader>g :Grep<CR>
 let g:tagbar_left = 1
 let g:tagbar_autoclose = 1
 nnoremap <silent> <F8>      :TagbarToggle<CR>
+
+" =======================================
+" Simple bookmark
+" =======================================
+nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 
 
