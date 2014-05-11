@@ -180,7 +180,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=Tamsyn7x14:h8:cDEFAULT
+        set guifont=Dina:h9:cDEFAULT
     endif
 endif
 
@@ -232,7 +232,8 @@ set showmode
 " ================================================================
 " Vundle setting
 " ===============================================================
-set rtp+=~/.vim/bundle/vundle
+set rtp+=$HOME/.vim/bundle/vundle
+
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -371,7 +372,8 @@ let g:ctrlp_lazy_update = 100
 
 " Custom list based on file list
 if has("win32")
-    let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'type %s/'.'/.gvproj/project.files']
+    "let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'type %s/'.'/.gvproj/project.files']
+    let g:ctrlp_user_command = 'type %s\.gvproj\project.files'
 else
     "let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'cat %s/'.'/.gvproj/project.files']
     let g:ctrlp_user_command = 'cat %s/.gvproj/project.files'
