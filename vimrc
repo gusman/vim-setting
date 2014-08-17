@@ -180,7 +180,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=Dina:h9:cDEFAULT
+        set guifont=source\ code\ pro:h9:cDEFAULT
     endif
 endif
 
@@ -318,6 +318,13 @@ let g:NERDTreeDirArrows=0
 
 " default output (if not set, default is dvi)
 " let g:Tex_DefaultTargetFormat = 'pdf'
+
+" ==============================================================
+" PATH configuration for windows only
+" ==============================================================
+if has('win32')
+    let $PATH .=  ';' . $HOME . '\.vim\bundle\vim-setting\bin\'
+endif
 
 " ==========================
 " cscope configuration
