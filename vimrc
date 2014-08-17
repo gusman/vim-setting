@@ -74,6 +74,7 @@ set fileformats=unix,dos,mac
 "set si                          "smartindent
 set backspace=indent,eol,start  "backspace behaviour
 syntax on                       "enable syntax color
+colorscheme desert
 set hlsearch                    "higlight search resut
 set nowrap                      "nowrapping text
 set wrapscan                    "searching whole file
