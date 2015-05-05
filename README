@@ -10,3 +10,7 @@ $ sh setup.sh
 open vim and run below command
 :BundleInstall
 
+
+In case using Tmux
+1. Use tmux -2 command (enable 256 colors)
+2. Makesure terminal name is xterm

@@ -74,7 +74,6 @@ set fileformats=unix,dos,mac
 "set si                          "smartindent
 set backspace=indent,eol,start  "backspace behaviour
 syntax on                       "enable syntax color
-colorscheme default
 set hlsearch                    "higlight search resut
 set nowrap                      "nowrapping text
 set wrapscan                    "searching whole file
@@ -254,7 +253,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'gusman/vim-setting'
 Bundle 'vim-scripts/grep.vim'
 Bundle 'AndrewRadev/simple_bookmarks.vim'
-
+Bundle 'tpope/vim-vividchalk'
 
 " ================================================================
 " NERD Tree key mapping and configuration
@@ -269,6 +268,7 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeWinPos = "right"
 " Don't use fancy arrow to avoid garbage display
 let g:NERDTreeDirArrows=0
+
 " ================================================================
 " Taglist mapping (taglist plugin)
 " ================================================================
@@ -411,4 +411,7 @@ nnoremap <silent> <F8>      :TagbarToggle<CR>
 " =======================================
 nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 
-
+" =======================================
+" Colorscheme
+" =======================================
+colorscheme vividchalk
