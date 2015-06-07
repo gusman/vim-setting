@@ -254,6 +254,7 @@ Bundle 'gusman/vim-setting'
 Bundle 'vim-scripts/grep.vim'
 Bundle 'AndrewRadev/simple_bookmarks.vim'
 Bundle 'tpope/vim-vividchalk'
+Bundle 'altercation/vim-colors-solarized'
 
 " ================================================================
 " NERD Tree key mapping and configuration
