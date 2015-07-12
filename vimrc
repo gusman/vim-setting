@@ -172,7 +172,7 @@ if has("gui_running")
 
     " Font selection
     if has("gui_gtk2")
-        set guifont=Fixed\ 10
+        set guifont=Monospace\ 9 
     elseif has("gui_photon")
         set guifont=Courier\ New:s11
     elseif has("gui_kde")
@@ -253,7 +253,6 @@ Bundle 'majutsushi/tagbar'
 Bundle 'gusman/vim-setting'
 Bundle 'vim-scripts/grep.vim'
 Bundle 'AndrewRadev/simple_bookmarks.vim'
-Bundle 'tpope/vim-vividchalk'
 Bundle 'altercation/vim-colors-solarized'
 
 " ================================================================
@@ -415,4 +414,7 @@ nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 " =======================================
 " Colorscheme
 " =======================================
-colorscheme vividchalk
+if has("gui_running")
+    set background=dark
+    colorscheme solarized
+endif
