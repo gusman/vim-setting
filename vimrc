@@ -172,7 +172,7 @@ if has("gui_running")
 
     " Font selection
     if has("gui_gtk2")
-        set guifont=Monospace\ 9 
+        set guifont=hack\ 9 
     elseif has("gui_photon")
         set guifont=Courier\ New:s11
     elseif has("gui_kde")
@@ -414,7 +414,12 @@ nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 " =======================================
 " Colorscheme
 " =======================================
+set background=dark
 if has("gui_running")
-    set background=dark
     colorscheme solarized
 endif
+
+" =======================================
+" Eclim
+" =======================================
+let g:SuperTabDefaultCompletionType = 'context'
