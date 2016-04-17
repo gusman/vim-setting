@@ -221,7 +221,7 @@ set showmode
 " ================================================================
 " Vundle setting
 " ===============================================================
-set rtp+=$HOME/.vim/bundle/vundle
+set rtp+=$HOME/vimfiles/bundle/vundle
 
 call vundle#rc()
 
@@ -278,7 +278,7 @@ let g:NERDTreeDirArrows=0
 " PATH configuration for windows only
 " ==============================================================
 if has('win32')
-    let $PATH .=  ';' . $HOME . '\.vim\bundle\vim-setting\bin\'
+    let $PATH .=  ';' . $HOME . '\vimfiles\bundle\vim-setting\bin\'
 endif
 
 " ==========================
