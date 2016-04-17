@@ -2,10 +2,16 @@ Requirements:
 1. Python
 2. Git
 
-Install
+Install Unix
 $ git clone https://github.com/gusman/vim-setting.git ~/.vim/bundle/vim-setting
 $ cd .vim/bundle/vim-setting
 $ sh setup.sh
+
+Install Windows
+> git clone https://github.com/gusman/vim-setting.git %HOME%\vimfiles\bundle\vim-setting
+> cd %HOME%\vimfiles\bundle\vim-setting
+> setup.bat
+
 
 open vim and run below command
 :BundleInstall

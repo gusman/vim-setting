@@ -10,9 +10,9 @@ IF NOT EXIST .vimdata\backup (
     MKDIR .vimdata\backup
 )
 
-IF NOT EXIST .vim\bundle\vundle (
+IF NOT EXIST vimfiles\bundle\vundle (
     ECHO "CLONING VUNDLE GIT"
-    git clone https://github.com/gmarik/vundle.git .vim\bundle\vundle
+    git clone https://github.com/gmarik/vundle.git vimfiles\bundle\vundle
 )
 
-COPY .vim\bundle\vim-setting\vimrc .vimrc
+COPY vimfiles\bundle\vim-setting\vimrc _vimrc

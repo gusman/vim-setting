@@ -2,7 +2,6 @@
 " Global variable
 " ================================"
 
-
 " ==========================
 " Load python file
 " ==========================
@@ -36,21 +35,39 @@ function! GV_AddUpdate()
     py gv_add_task()
 endfunction
 
-" function! GV_FUFList()
-"    call fuf#givenfile#launch('', 1, 'PRJ>', g:alist)
-" endfunction
-
 
 " ========================
 " Key mapping
 " ========================
-" nmap <F6>  : FufRenewCache<CR>
-" nmap <F7>  : call GV_FUFList()<CR> 
-" <F8> : already used in vimrc for taglist toggle
+
+" <F8> : already used in vimrc for tagbar toggle
 " <F9> : already used in vimrc for NERDTree toggle
-nmap <F10> : call GV_Load()<CR> 
-nmap <F11> : call GV_GenCtags()<CR>
-nmap <F12> : call GV_GenCscope() <CR>
+function! GV_KeyMappingCommon()
+    nmap <F10> : call GV_Load()<CR> 
+    nmap <F11> : call GV_GenCtags()<CR>
+    nmap <F12> : call GV_GenCscope() <CR>
+endfunction
+
+function! GV_KeyMappingJava()
+"For smart (trying to guess import option) insert class import with <F4>:
+    nmap <F10> <Plug>(JavaComplete-Imports-AddSmart)
+    imap <F10> <Plug>(JavaComplete-Imports-AddSmart)
+
+"For usual (will ask for import option) insert class import with <F5>:
+    "nmap <F5> <Plug>(JavaComplete-Imports-Add)
+    "imap <F5> <Plug>(JavaComplete-Imports-Add)
+
+"For add all missing imports with <F6>:
+    nmap <F11> <Plug>(JavaComplete-Imports-AddMissing)
+    imap <F11> <Plug>(JavaComplete-Imports-AddMissing)
+
+"For remove all missing imports with <F7>:
+    nmap <F12> <Plug>(JavaComplete-Imports-RemoveUnused)
+    imap <F12> <Plug>(JavaComplete-Imports-RemoveUnused)
+
+endfunction
+
+
 
 " =======================
 " Event driven action
@@ -60,6 +77,10 @@ if has("autocmd")
     autocmd BufWritePost *.[chCH]	: call GV_AddUpdate() " C files
     autocmd BufWritePost *.[ch]pp	: call GV_AddUpdate() " cpp files lower case
     autocmd BufWritePost *.[CH]PP	: call GV_AddUpdate() " cpp files upper case
+
+
+    autocmd FileType *.[Jj]ava	: call GV_KeyMappingJava()
+
 endif
     
 

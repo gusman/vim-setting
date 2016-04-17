@@ -81,13 +81,14 @@ set ic                          "ignore case sensitive
 "set cindent                     "set cindent (c language indentation)
 
 " Set default tab value
-set shiftwidth=4
-set softtabstop=4
 
 "set textwidth=79
 set noexpandtab
 
 " -- function for editing 
+"  =====================================================================
+"  Tab configuration
+"  =====================================================================
 let s:mytabsize = 0
 
 " Set to tab to 4
@@ -114,6 +115,10 @@ function! TabToogle()
 		call Tab4()
 	endif
 endfunction
+
+" Set default tab value
+call Tab4()
+
 
 " ================================================================
 " Autocommand section
@@ -199,22 +204,6 @@ set pastetoggle=<F2>
 set showmode
 
 " ================================================================
-" Pathogen
-" ================================================================
-" call pathogen#infect()
-" call pathogen#helptags()
-
-" ================================================================
-" Visual mode mapping
-" ================================================================
-" Copy
-" vnoremap <silent> <C-c>  "+y
-" Cut
-" vnoremap <silent> <C-x>  "+x
-" Paste
-" nnoremap <silent> <C-p>  "+gP
-
-" ================================================================
 " Tab pages mapping
 " ================================================================
 " Insted of using below command please use original
@@ -254,6 +243,7 @@ Bundle 'gusman/vim-setting'
 Bundle 'vim-scripts/grep.vim'
 Bundle 'AndrewRadev/simple_bookmarks.vim'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'artur-shaik/vim-javacomplete2'
 
 " ================================================================
 " NERD Tree key mapping and configuration
@@ -268,42 +258,6 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeWinPos = "right"
 " Don't use fancy arrow to avoid garbage display
 let g:NERDTreeDirArrows=0
-
-" ================================================================
-" Taglist mapping (taglist plugin)
-" ================================================================
-" Togle taglist menu
-" nnoremap <silent> <F8>      :TlistToggle<CR>
-
-" Displaying tags for only one file~
-" let Tlist_Show_One_File = 1
-" If you are the last, kill yourself
-" let Tlist_Exist_OnlyWindow = 1
-" Split to the right side of the screen
-" let Tlist_Use_Right_Window = 0
-" Sort by order or name
-" let Tlist_Sort_Type = "order"
-" Do not show prototypes and not tags in the taglist window.
-" let Tlist_Display_Prototype = 0
-" Remove extra information and blank lines from the taglist window.
-" let Tlist_Compart_Format = 1
-" Jump to taglist window on open.
-" let Tlist_GainFocus_On_ToggleOpen = 1
-" Show tag scope next to the tag name.
-" let Tlist_Display_Tag_Scope = 1
-" Close the taglist window when a file or tag is selected.
-" let Tlist_Close_On_Select = 1
-" Don't Show the fold indicator column in the taglist window.
-" let Tlist_Enable_Fold_Column = 0
-" Tlist Window's width
-" let Tlist_WinWidth = 40
-
-
-" ================================================================
-" Buffer Explorer mapping (bufexplore)
-" ================================================================
-" Show all buffer
-" nmap <silent> <F4> <Leader>be
 
 " ===============================================================
 " Latex Suite Configuration
@@ -346,13 +300,6 @@ if has("cscope")
     " endif
     set csverb
 endif
-
-" ===================================
-" FUF
-" ===================================
-" let g:alist = []
-" let g:fuf_enumeratingLimit = 25
-" let g:fuf_maxMenuWidth = 180 " will be adjusted 
 
 " ==============================================================
 " CTRLP configuration
@@ -419,3 +366,7 @@ if has("gui_running")
     colorscheme solarized
 endif
 
+" =======================================
+" Javacomplete2
+" =======================================
+" autocmd Filetype java setlocal omnifunc=javacomplete#Complete
