@@ -5,7 +5,11 @@
 " ==========================
 " Load python file
 " ==========================
-pyfile $HOME/.vim/bundle/vim-setting/plugin/gv_project.py
+if has('win32')
+	pyfile $HOME/vimfiles/bundle/vim-setting/plugin/gv_project.py
+else
+	pyfile $HOME/.vim/bundle/vim-setting/plugin/gv_project.py
+endif
 
 " ===================================
 " Function list

@@ -221,30 +221,38 @@ set showmode
 " ================================================================
 " Vundle setting
 " ===============================================================
-set rtp+=$HOME/vimfiles/bundle/vundle
+filetype off		" mandatory
 
-call vundle#rc()
+" setup
+if has('win32')
+	set rtp+=$HOME/vimfiles/bundle/Vundle.vim
+	call vundle#begin('$HOME/vimfiles/bundle/')
+else
+	set rtp+=$HOME/.vim/bundle/Vundle.vim
+	call vundle#begin()
+endif
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
-" My Bundles here:
-
+" My Plugins here:
 " original repos on github
 " vim-scripts repos
-Bundle 'L9'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'kien/ctrlp.vim'
-Bundle 'ervandew/supertab'
-Bundle 'vim-scripts/OmniCppComplete'
-Bundle 'chazy/cscope_maps'
-Bundle 'majutsushi/tagbar'
-Bundle 'gusman/vim-setting'
-Bundle 'vim-scripts/grep.vim'
-Bundle 'AndrewRadev/simple_bookmarks.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'artur-shaik/vim-javacomplete2'
+Plugin 'L9'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'kien/ctrlp.vim'
+Plugin 'ervandew/supertab'
+Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'chazy/cscope_maps'
+Plugin 'majutsushi/tagbar'
+Plugin 'gusman/vim-setting'
+Plugin 'vim-scripts/grep.vim'
+Plugin 'AndrewRadev/simple_bookmarks.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'artur-shaik/vim-javacomplete2'
 
+call vundle#end()			" mandatory
+filetype plugin indent on	" mandatory
 " ================================================================
 " NERD Tree key mapping and configuration
 " ================================================================
