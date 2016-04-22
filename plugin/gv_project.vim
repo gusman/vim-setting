@@ -71,8 +71,6 @@ function! GV_KeyMappingJava()
 
 endfunction
 
-
-
 " =======================
 " Event driven action
 " =======================
@@ -81,10 +79,6 @@ if has("autocmd")
     autocmd BufWritePost *.[chCH]	: call GV_AddUpdate() " C files
     autocmd BufWritePost *.[ch]pp	: call GV_AddUpdate() " cpp files lower case
     autocmd BufWritePost *.[CH]PP	: call GV_AddUpdate() " cpp files upper case
-
-
-    autocmd FileType *.[Jj]ava	: call GV_KeyMappingJava()
-
 endif
     
 

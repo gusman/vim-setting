@@ -12,7 +12,7 @@ IF NOT EXIST .vimdata\backup (
 
 IF NOT EXIST vimfiles\bundle\vundle (
     ECHO "CLONING VUNDLE GIT"
-    git clone https://github.com/VundleVim/Vundle.vim vimfiles\bundle\
+    git clone https://github.com/VundleVim/Vundle.vim vimfiles\bundle\Vundle.vim
 )
 
 COPY vimfiles\bundle\vim-setting\vimrc _vimrc
