@@ -6,7 +6,7 @@ import platform
 import threading
 import time
 import subprocess
-import Queue
+import queue
 from os.path import join, getsize
 
 debug = True
@@ -30,7 +30,7 @@ def str_trim(str):
   
 def gv_parsefile(filepath):
     if debug == True:
-        print ">> PARSE FILE"
+        print(">> PARSE FILE")
 
     global global_config
     tmp = ''
@@ -41,22 +41,22 @@ def gv_parsefile(filepath):
     f = open(filepath, 'r')
 
     while True:
-	tmp = f.readline()
+        tmp = f.readline()
 
-	if "#1" == tmp[0:2]:
-	    projectname = f.readline()
-	    projectname = projectname[0:len(projectname)-1] 
+        if "#1" == tmp[0:2]:
+            projectname = f.readline()
+            projectname = projectname[0:len(projectname)-1] 
 
-	elif "#2" == tmp[0:2]:
-	    confdir = f.readline()
-	    confdir = confdir[0:len(confdir)-1]
+        elif "#2" == tmp[0:2]:
+            confdir = f.readline()
+            confdir = confdir[0:len(confdir)-1]
 
-	elif '>' == tmp[0]:
-	    srcdir.append(tmp[1:len(tmp)-1])
-	    continue
+        elif '>' == tmp[0]:
+            srcdir.append(tmp[1:len(tmp)-1])
+            continue
 
-	elif "#EOF" == tmp[0:4]:
-	    break;
+        elif "#EOF" == tmp[0:4]:
+            break;
 
     f.close()
     ctagsfile = confdir + "/tags"
@@ -71,7 +71,7 @@ def gv_parsefile(filepath):
 
 def gv_getconfig(filepath):
     if debug == True:
-        print ">> GET CONFIG"
+        print(">> GET CONFIG")
     
     global global_config
     gv_parsefile(filepath)
@@ -98,7 +98,7 @@ def gv_writelist(fobj, srcdir):
 
 def gv_collectsrc():
     global global_config
-    
+
     srcdir = []
     confdir = global_config['CONF_DIR']
     srcdir = global_config['SRC_DIR']
@@ -106,22 +106,22 @@ def gv_collectsrc():
     srclist = confdir + "project.files"
 
     if not os.path.isdir(confdir):
-        print confdir + ": NOT EXIST"
+        print(confdir + ": NOT EXIST")
         return
 
     # generate list of files
     f = open(srclist, 'w') 
 
     for item_dir in srcdir:
-	if not os.path.isdir(item_dir):
-	    continue
-	gv_writelist(f, item_dir);
+        if not os.path.isdir(item_dir):
+            continue
+        gv_writelist(f, item_dir);
 
     f.close()
 
 def gv_gentags(verbose = True):
     if True == debug and True == verbose:
-        print ">> GEN TAGS"
+        print(">> GEN TAGS")
 
     global global_config
 
@@ -130,41 +130,41 @@ def gv_gentags(verbose = True):
     srclist = confdir + "project.files"
 
     if not os.path.isfile(srclist):
-	print srclist + " NOT EXIST"
-	return 
+        print(srclist + " NOT EXIST")
+        return 
 
     ctagsfile = global_config['CTAGS_FILE']
     cmd = "ctags " 
     
     if True == verbose:
-	cmd += " -V "
+        cmd += " -V "
     
     cmd += " --c-kinds=+p --c++-kinds=+p --fields=+iaSl --extra=+q " + \
-	  " -o " + ctagsfile +  " -L " + srclist
+        " -o " + ctagsfile +  " -L " + srclist
 
     #os.system(cmd)
     subprocess.call(cmd, shell = True)
 
 def gv_settags():
     if debug == True:
-        print ">> SET TAGS"
+        print(">> SET TAGS")
     
     global global_config
 
     ctagsfile = global_config['CTAGS_FILE']
     if not os.path.isfile(ctagsfile):
-        print "CTAGS FILE: " + ctagsfile + " -> Not exist!"
+        print("CTAGS FILE: " + ctagsfile + " -> Not exist!")
         return
 
     # I don't know, why the command must be a variable
     # If it is not a variable, command will not run properly
     cmd = "set tags=" + ctagsfile   
-    print cmd
+    print(cmd)
     vim.command(cmd)
 
 def gv_updatetags():
     if debug == True:
-        print ">> UDPATE TAGS"
+        print(">> UDPATE TAGS")
     gv_gentags()
     gv_settags()
 
@@ -178,14 +178,14 @@ def gv_gencscope(verbose = True):
 
     gv_collectsrc()
     if not os.path.isfile(srclist):
-	print srclist + " NOT EXIST"
-	return 
+        print(srclist + " NOT EXIST")
+        return 
 
     # generate cscope database
     cmd = "cscope -b -k "
 
     if True == verbose:
-	cmd += " -v "
+        cmd += " -v "
 
     # if on Linux add reverse database
     if platform.system() == 'Linux':
@@ -203,7 +203,7 @@ def gv_addcscope():
         cmd = "cs add " + cscopedb
         vim.command(cmd)
     else:
-        print "CSCOPE DB FILE NOT EXIST"
+        print("CSCOPE DB FILE NOT EXIST")
 
 def gv_bg_update():
     global global_lock
@@ -211,7 +211,7 @@ def gv_bg_update():
     gv_gentags(False)
     gv_gencscope(False)
     vim.command("silent! cs reset")
-    print "Updating done"
+    print("Updating done")
     global_lock.release()
 
 # // disable loadlist since using ctrlp
@@ -249,13 +249,13 @@ def gv_activate_timer():
     global global_devmode
 
     if True == global_devmode:
-	global global_timer
+        global global_timer
 
-	if not(None == global_timer) and global_timer.isAlive():
-	    global_timer.cancel()
+        if not(None == global_timer) and global_timer.isAlive():
+            global_timer.cancel()
 
-	global_timer = threading.Timer(3, gv_bg_update)
-	global_timer.start()
+        global_timer = threading.Timer(3, gv_bg_update)
+        global_timer.start()
     
 def gv_add_task():
     gv_activate_timer()
@@ -266,12 +266,12 @@ def gv_set_bookmark_file():
     confdir = dir_trim(confdir)
     cmd = "let g:simple_bookmarks_filename = "
     cmd += "'" + confdir + "vim_bookmark" + "'"
-    print cmd
+    print(cmd)
     vim.command(cmd)
 
 def gv_load(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
-        print prjconf + ": NOT EXIST!"
+        print(prjconf + ": NOT EXIST!")
         return
 
     gv_getconfig(prjconf)
@@ -284,7 +284,7 @@ def gv_load(prjconf=".gvproj/prj.conf"):
 
 def gv_init(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
-        print prjconf + ": NOT EXIST!"
+        print(prjconf + ": NOT EXIST!")
         return
 
     gv_getconfig(prjconf) 

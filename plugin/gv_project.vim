@@ -6,9 +6,17 @@
 " Load python file
 " ==========================
 if has('win32')
-	pyfile $HOME/vimfiles/bundle/vim-setting/plugin/gv_project.py
+	if has('python3')
+		py3file $HOME/vimfiles/bundle/vim-setting/plugin/gv_project.py
+	else
+		pyfile $HOME/vimfiles/bundle/vim-setting/plugin/gv_project.py
+	endif
 else
-	pyfile $HOME/.vim/bundle/vim-setting/plugin/gv_project.py
+	if has('python3')
+		py3file $HOME/.vim/bundle/vim-setting/plugin/gv_project.py
+	else 
+		pyfile $HOME/.vim/bundle/vim-setting/plugin/gv_project.py
+	endif
 endif
 
 " ===================================
@@ -19,24 +27,44 @@ function! GV_ProjectInfo()
 endfunction
 
 function! GV_Init()
-    py gv_init()
+	if has('python3')
+		py3 gv_init()
+	else
+		py gv_init()
+	endif
 endfunction
 
 function! GV_Load()
-    py gv_load()
+	if has('python3')
+		py3 gv_load()
+	else
+		py gv_load()
+	endif
 endfunction
 
 function! GV_GenCscope()
-    py gv_gencscope()
+	if has('python3')
+		py3 gv_gencscope()
+	else
+		py gv_gencscope()
+	endif
     cs reset
 endfunction
 
 function! GV_GenCtags()
-    py gv_gentags()
+	if has('python3')
+		py3 gv_gentags()
+	else
+		py gv_gentags()
+	endif
 endfunction
 
 function! GV_AddUpdate()
-    py gv_add_task()
+	if has('python3')
+		py3 gv_add_task()
+	else
+		py gv_add_task()
+	endif
 endfunction
 
 
