@@ -185,7 +185,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=source\ code\ pro:h9:cDEFAULT
+        set guifont=hack:h9:cDEFAULT
     endif
 endif
 
