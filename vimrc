@@ -155,13 +155,13 @@ if has("autocmd")
 	autocmd FileType tex setlocal linebreak
 
 	" auto command for c file 
-	autocmd FileType c,cpp,h call Tab4()
+	" autocmd FileType c,cpp,h call Tab4()
 	" autocmd FileType c,cpp,h setlocal shiftwidth=8
 	" autocmd FileType c,cpp,h setlocal softtabstop=8
 	" autocmd FIleType c,cpp,h setlocal noexpandtab
 
 else
-        set autoindent " always set autoindenting on
+	set autoindent " always set autoindenting on
 endif " has("autocmd")
 
 
@@ -241,7 +241,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'L9'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'kien/ctrlp.vim'
-Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'chazy/cscope_maps'
 Plugin 'majutsushi/tagbar'
@@ -249,7 +248,7 @@ Plugin 'gusman/vim-setting'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'AndrewRadev/simple_bookmarks.vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'lervag/vimtex'
 
 call vundle#end()			" mandatory
 filetype plugin indent on	" mandatory
@@ -318,9 +317,6 @@ let g:ctrlp_by_filename = 1
 " Use regex for searching
 let g:ctrlp_regexp = 1
 
-" Disable working path feature
-let g:ctrlp_working_path_mode = 0
-
 " No scan for dotfiles or dotfolder
 let g:ctrlp_dotfiles = 0
   
@@ -332,15 +328,6 @@ let g:ctrlp_follow_symlinks = 1
 
 " Lazy update, update list after 100s
 let g:ctrlp_lazy_update = 100
-
-" Custom list based on file list
-if has("win32")
-    "let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'type %s/'.'/.gvproj/project.files']
-    let g:ctrlp_user_command = 'type %s\.gvproj\project.files'
-else
-    "let g:ctrlp_user_command = [getcwd().'/.gvproj/project.files', 'cat %s/'.'/.gvproj/project.files']
-    let g:ctrlp_user_command = 'cat %s/.gvproj/project.files'
-endif
 
 let g:ctrlp_max_height = 25
 
@@ -374,7 +361,3 @@ if has("gui_running")
     colorscheme solarized
 endif
 
-" =======================================
-" Javacomplete2
-" =======================================
-" autocmd Filetype java setlocal omnifunc=javacomplete#Complete
