@@ -87,37 +87,46 @@ set noexpandtab
 
 " -- function for editing 
 "  =====================================================================
-"  Tab configuration
+"  Tab and space configuration
 "  =====================================================================
-let s:mytabsize = 0
-
-" Set to tab to 4
-function! Tab4()
+function! DefaultEditor()
 	setlocal ts=4
 	setlocal sw=4
 	setlocal softtabstop=4
-	let s:mytabsize=4
+	setlocal nowrap
+	setlocal linebreak
+	setlocal noexpandtab
 endfunction
 
-" Set to tab to 8
-function! Tab8()
+function! C_CppEditor()
 	setlocal ts=8
 	setlocal sw=8
 	setlocal softtabstop=8
-	let s:mytabsize=8
+	setlocal nowrap
+	setlocal nolinebreak
+	setlocal noexpandtab
 endfunction
 
-" Tab tooggle
-function! TabToogle()
-	if s:mytabsize != 8
-		call Tab8()
-	else
-		call Tab4()
-	endif
+function! Tab4Editor()
+	setlocal ts=4
+	setlocal sw=4
+	setlocal softtabstop=4
+	setlocal nowrap
+	setlocal nolinebreak
+	setlocal noexpandtab
+endfunction
+
+function! PyEditor()
+	setlocal ts=4
+	setlocal sw=4
+	setlocal softtabstop=4
+	setlocal autoindent
+	setlocal expandtab
+	setlocal fileformat=unix
 endfunction
 
 " Set default tab value
-call Tab4()
+call DefaultEditor()
 
 
 " ================================================================
@@ -150,15 +159,12 @@ if has("autocmd")
 	augroup END
 
 
-	" auto command for FileType tex : wrap and linebreak
-	autocmd FileType tex setlocal wrap
-	autocmd FileType tex setlocal linebreak
-
 	" auto command for c file 
-	" autocmd FileType c,cpp,h call Tab4()
-	" autocmd FileType c,cpp,h setlocal shiftwidth=8
-	" autocmd FileType c,cpp,h setlocal softtabstop=8
-	" autocmd FIleType c,cpp,h setlocal noexpandtab
+	autocmd FileType c,cpp,h call C_CppEditor()
+	autocmd FileType python  call PyEditor()
+	autocmd FileType java	 call Tab4Editor()
+	autocmd FileType vim     call Tab4Editor()	
+	autocmd FileType tex     call DefaultEditor()	
 
 else
 	set autoindent " always set autoindenting on
@@ -169,24 +175,26 @@ endif " has("autocmd")
 " GUI Vim
 " ================================================================
 if has("gui_running")
-    " Remove Gui Toolbar, it's useless
-    set guioptions-=T
+	" Remove Gui Toolbar, it's useless
+	set guioptions-=T
 
-    " Set line and column number
-    " set lines=44 columns=120
+	" Set line and column number
+	" set lines=44 columns=120
 
-    " Font selection
-    if has("gui_gtk2")
-        set guifont=hack\ 9 
-    elseif has("gui_photon")
-        set guifont=Courier\ New:s11
-    elseif has("gui_kde")
-        set guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
-    elseif has("x11")
-        set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
-    else
-        set guifont=hack:h9:cDEFAULT
-    endif
+	" Font selection
+	if has("gui_gtk3")
+		set guifont=hack\ 9 
+	elseif has("gui_gtk2")
+		set guifont=hack\ 9 
+	elseif has("gui_photon")
+		set guifont=Courier\ New:s11
+	elseif has("gui_kde")
+		set guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
+	elseif has("x11")
+		set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
+	else
+		set guifont=hack:h9:cDEFAULT
+	endif
 endif
 
 " ================================================================
@@ -194,9 +202,6 @@ endif
 " ================================================================
 " Search hilight turn off key
 nnoremap <silent> <S-h>     :nohlsearch<CR>
-
-" toggle tabsize
-nnoremap <F3>	:call TabToogle() <CR>
 
 " toggle paste in insert on/off
 set pastetoggle=<F2>
@@ -249,6 +254,7 @@ Plugin 'vim-scripts/grep.vim'
 Plugin 'AndrewRadev/simple_bookmarks.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'lervag/vimtex'
+Plugin 'davidhalter/jedi-vim'
 
 call vundle#end()			" mandatory
 filetype plugin indent on	" mandatory
@@ -285,7 +291,7 @@ let g:NERDTreeDirArrows=0
 " PATH configuration for windows only
 " ==============================================================
 if has('win32')
-    let $PATH .=  ';' . $HOME . '\vimfiles\bundle\vim-setting\bin\'
+	let $PATH .=  ';' . $HOME . '\vimfiles\bundle\vim-setting\bin\'
 endif
 
 " ==========================
@@ -293,19 +299,19 @@ endif
 " ==========================
 
 if has("cscope")
-    set csto=0
-    set cst
-    set nocsverb
+	set csto=0
+	set cst
+	set nocsverb
 
-    "example for cscope scritp
-    " add any database in current directory
-    " if filereadable("cscope.out")
-    "    cs add cscope.out
-    " else add database pointed to by environment
-    " elseif $CSCOPE_DB != ""
-    "    cs add $CSCOPE_DB
-    " endif
-    set csverb
+	"example for cscope scritp
+	" add any database in current directory
+	" if filereadable("cscope.out")
+	"    cs add cscope.out
+	" else add database pointed to by environment
+	" elseif $CSCOPE_DB != ""
+	"    cs add $CSCOPE_DB
+	" endif
+	set csverb
 endif
 
 " ==============================================================
@@ -358,6 +364,17 @@ nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 " =======================================
 set background=dark
 if has("gui_running")
-    colorscheme solarized
+	colorscheme solarized
 endif
 
+" =======================================
+" VIM TEX 
+" ======================================
+" execute vim --servername VIM
+let g:vimtex_latexmk_build_dir = 'build'
+"
+" =======================================
+" VIM JEDI
+" ======================================
+" TODO: Need to find out how to enable below option
+" let g:jedi#auto_initialization = 0

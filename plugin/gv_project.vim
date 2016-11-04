@@ -115,5 +115,4 @@ if has("autocmd")
     autocmd BufWritePost *.[ch]pp	: call GV_AddUpdate() " cpp files lower case
     autocmd BufWritePost *.[CH]PP	: call GV_AddUpdate() " cpp files upper case
 endif
-    
 
