@@ -6,7 +6,6 @@ import platform
 import threading
 import time
 import subprocess
-import queue
 from os.path import join, getsize
 
 debug = True
@@ -14,7 +13,6 @@ global_devmode = False
 global_config = {}
 global_timer = None
 global_lock = threading.Lock()
-
 
 def dir_trim(str):
     if 0 == len(str):
@@ -24,12 +22,10 @@ def dir_trim(str):
         str = str + '/'
     return str
 
-
 def str_trim(str):
     if '\n' == str[len(str) - 1]:
         str = str[:-1]
     return str
-
 
 def gv_parsefile(filepath):
     if debug == True:
@@ -72,14 +68,12 @@ def gv_parsefile(filepath):
     global_config['CSCOPE_DB'] = cscopedb
     # print global_config
 
-
 def gv_getconfig(filepath):
     if debug == True:
         print(">> GET CONFIG")
 
     global global_config
     gv_parsefile(filepath)
-
 
 def gv_writelist(fobj, srcdir):
     for root, dirs, files in os.walk(srcdir, followlinks=True):
@@ -100,7 +94,6 @@ def gv_writelist(fobj, srcdir):
                 filename = root + '/' + name + "\n"
                 # print filename[:len(filename)-1]
                 fobj.write(filename)
-
 
 def gv_collectsrc():
     global global_config
@@ -124,7 +117,6 @@ def gv_collectsrc():
         gv_writelist(f, item_dir)
 
     f.close()
-
 
 def gv_gentags(verbose=True):
     if True == debug and True == verbose:
@@ -152,7 +144,6 @@ def gv_gentags(verbose=True):
     # os.system(cmd)
     subprocess.call(cmd, shell=True)
 
-
 def gv_settags():
     if debug == True:
         print(">> SET TAGS")
@@ -170,13 +161,11 @@ def gv_settags():
     print(cmd)
     vim.command(cmd)
 
-
 def gv_updatetags():
     if debug == True:
         print(">> UDPATE TAGS")
     gv_gentags()
     gv_settags()
-
 
 def gv_gencscope(verbose=True):
     global global_config
@@ -205,7 +194,6 @@ def gv_gencscope(verbose=True):
     # os.system(cmd)
     subprocess.call(cmd, shell=True)
 
-
 def gv_addcscope():
     global global_config
 
@@ -216,7 +204,6 @@ def gv_addcscope():
     else:
         print("CSCOPE DB FILE NOT EXIST")
 
-
 def gv_bg_update():
     global global_lock
     global_lock.acquire()
@@ -225,38 +212,6 @@ def gv_bg_update():
     vim.command("silent! cs reset")
     print("Updating done")
     global_lock.release()
-
-# // disable loadlist since using ctrlp
-# def gv_loadlist():
-#    global global_config
-#
-#    confdir = global_config['CONF_DIR']
-#    confdir = dir_trim(confdir)
-#    cscopefile = confdir + "project.files"
-#
-#    if not os.path.isfile(cscopefile) :
-#        print confdir + ": NOT EXIST"
-#        return
-#
-#    print "Loading file"
-#
-#    # generate cscope files
-#    f = open(cscopefile, 'r')
-#    while True:
-#	path = f.readline()
-#	if (0 == len(path)):
-#	    break;
-#	path = path[0:len(path) - 1]
-#	if platform.system() == 'Linux':
-#	    cmd = "call add(g:alist,\"" + path + "\")"
-#	else:
-#	    cmd = "call add(g:alist,'" + path + "')"
-#	vim.command(cmd)
-#
-#    print "Finish"
-#
-#    f.close()
-
 
 def gv_activate_timer():
     global global_devmode
@@ -270,10 +225,8 @@ def gv_activate_timer():
         global_timer = threading.Timer(3, gv_bg_update)
         global_timer.start()
 
-
 def gv_add_task():
     gv_activate_timer()
-
 
 def gv_set_bookmark_file():
     global global_config
@@ -283,7 +236,6 @@ def gv_set_bookmark_file():
     cmd += "'" + confdir + "vim_bookmark" + "'"
     print(cmd)
     vim.command(cmd)
-
 
 def gv_load(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):
@@ -297,7 +249,6 @@ def gv_load(prjconf=".gvproj/prj.conf"):
     # gv_loadlist()
     global global_devmode
     global_devmode = True
-
 
 def gv_init(prjconf=".gvproj/prj.conf"):
     if not os.path.isfile(prjconf):

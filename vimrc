@@ -44,8 +44,8 @@ set noea
 let g:clipbrdDefaultReg='+'
 
 " Always display status line
-" set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-" set laststatus=2  " Always show status line
+set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+set laststatus=2  " Always show status line
 
 " Backup
 set backup
@@ -108,15 +108,6 @@ function! Tab4Editor()
 	setlocal noexpandtab
 endfunction
 
-function! PyEditor()
-	setlocal ts=4
-	setlocal sw=4
-	setlocal softtabstop=4
-	setlocal autoindent
-	setlocal expandtab
-	setlocal fileformat=unix
-endfunction
-
 function! TexEditor()
 	setlocal ts=4
 	setlocal sw=4
@@ -161,7 +152,6 @@ if has("autocmd")
 	augroup END
 
 	" auto command for c file 
-	autocmd FileType python  call PyEditor()
 	autocmd FileType java	 call Tab4Editor()
 	autocmd FileType vim     call Tab4Editor()	
 	autocmd FileType tex     call TexEditor()	
@@ -250,8 +240,11 @@ Plugin 'altercation/vim-colors-solarized'
 
 "------ C Coding Plugin -----------------------------------------
 Plugin 'chazy/cscope_maps'
-Plugin 'vim-scripts/OmniCppComplete'
+"Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'gusman/vim-setting'
+
+"------ Java Coding Plugin -------------------------------------
+" Plugin 'artur-shaik/vim-javacomplete2'
 
 "------ Python Coding Plugin ------------------------------------
 Plugin 'davidhalter/jedi-vim'
@@ -276,21 +269,6 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeWinPos = "right"
 " Don't use fancy arrow to avoid garbage display
 let g:NERDTreeDirArrows=0
-
-" ===============================================================
-" Latex Suite Configuration
-" ===============================================================
-" dvi output previewer
-" let g:Tex_ViewRule_dvi = 'xdvi'
-
-" ps output previewer
-" let g:Tex_ViewRule_ps  = 'evince'
-
-" pdf output previewer
-" let g:Tex_ViewRule_pdf = 'evince'	
-
-" default output (if not set, default is dvi)
-" let g:Tex_DefaultTargetFormat = 'pdf'
 
 " ==============================================================
 " PATH configuration for windows only
@@ -383,9 +361,12 @@ let g:vimtex_latexmk_build_dir = 'build'
 " TODO: Need to find out how to enable below option
 " let g:jedi#auto_initialization = 0
 
-
 " =============================================================================
 " My VIM Setting configuration
 " =============================================================================
+" --- C and CPP Editor ---
 let g:c_cpp_editor = 1
 let g:project_mode = 1
+
+" --- Python Editor    ---
+let g:py_editor = 1

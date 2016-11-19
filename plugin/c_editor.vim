@@ -71,15 +71,15 @@ function! GV_LoadPython()
 	if 0 == s:py_script_loaded && 1 == g:project_mode
 		if has('win32')
 			if has('python3')
-				py3file $HOME/vimfiles/bundle/vim-setting/plugin/c_editor/prj_hndlr.py
+				py3file $HOME/vimfiles/bundle/vim-setting/plugin/c_prj_hndlr.py
 			else
-				pyfile $HOME/vimfiles/bundle/vim-setting/plugin/c_editor/prj_hndlr.py
+				pyfile $HOME/vimfiles/bundle/vim-setting/plugin/c_prj_hndlr.py
 			endif
 		else
 			if has('python3')
-				py3file $HOME/.vim/bundle/vim-setting/plugin/c_editor/prj_hndlr.py
+				py3file $HOME/.vim/bundle/vim-setting/plugin/c_prj_hndlr.py
 			else 
-				pyfile $HOME/.vim/bundle/vim-setting/plugin/c_editor/prj_hndlr.py
+				pyfile $HOME/.vim/bundle/vim-setting/plugin/c_prj_hndlr.py
 			endif
 		endif
 	endif
@@ -128,7 +128,7 @@ endfunction
 " Wrap it all
 " =============================================================================
 function! C_CppEditorSetup()
-	echo "ENTERING C / CPP EDITOR"
+	"echo "ENTERING C / CPP EDITOR"
 	call GV_C_CppEditor()
 	call GV_GlobalPluginReConfigure()
 	call GV_LoadPython()
@@ -141,7 +141,6 @@ endfunction
 " =============================================================================
 if (1 == g:c_cpp_editor)
 	if has("autocmd") 
-		echo g:c_cpp_editor
 		autocmd FileType c,cpp,h call C_CppEditorSetup()
 	endif
 endif

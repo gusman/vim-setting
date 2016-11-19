@@ -1,0 +1,6 @@
+1. Need to find out how to replace OmniCPP, currently OmniCPP is already disabled
+   - Possible solution: "you complete me"
+
+2. Need to avoid auto initialization of jedi-vim
+
+3. Latex separated editor handle
