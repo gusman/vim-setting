@@ -44,8 +44,8 @@ set noea
 let g:clipbrdDefaultReg='+'
 
 " Always display status line
-set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-set laststatus=2  " Always show status line
+" set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+" set laststatus=2  " Always show status line
 
 " Backup
 set backup
@@ -56,6 +56,7 @@ set directory=$HOME/.vimdata/swap
 set wildmenu
 set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,
                      \*.jpg,*.gif,*.png
+
 " Turn on wild mode huge list
 set wildmode=list:longest
 
@@ -85,7 +86,7 @@ set ic                          "ignore case sensitive
 "set textwidth=79
 set noexpandtab
 
-" -- function for editing 
+" -- Configuration for specific editing 
 "  =====================================================================
 "  Tab and space configuration
 "  =====================================================================
@@ -95,15 +96,6 @@ function! DefaultEditor()
 	setlocal softtabstop=4
 	setlocal nowrap
 	setlocal linebreak
-	setlocal noexpandtab
-endfunction
-
-function! C_CppEditor()
-	setlocal ts=8
-	setlocal sw=8
-	setlocal softtabstop=8
-	setlocal nowrap
-	setlocal nolinebreak
 	setlocal noexpandtab
 endfunction
 
@@ -124,6 +116,16 @@ function! PyEditor()
 	setlocal expandtab
 	setlocal fileformat=unix
 endfunction
+
+function! TexEditor()
+	setlocal ts=4
+	setlocal sw=4
+	setlocal softtabstop=4
+	setlocal autoindent
+	setlocal expandtab
+	setlocal fileformat=unix
+endfunction
+
 
 " Set default tab value
 call DefaultEditor()
@@ -158,13 +160,11 @@ if has("autocmd")
 	\ endif
 	augroup END
 
-
 	" auto command for c file 
-	autocmd FileType c,cpp,h call C_CppEditor()
 	autocmd FileType python  call PyEditor()
 	autocmd FileType java	 call Tab4Editor()
 	autocmd FileType vim     call Tab4Editor()	
-	autocmd FileType tex     call DefaultEditor()	
+	autocmd FileType tex     call TexEditor()	
 
 else
 	set autoindent " always set autoindenting on
@@ -202,11 +202,9 @@ endif
 " ================================================================
 " Search hilight turn off key
 nnoremap <silent> <S-h>     :nohlsearch<CR>
-
 " toggle paste in insert on/off
 set pastetoggle=<F2>
 
-set showmode
 
 " ================================================================
 " Tab pages mapping
@@ -240,24 +238,31 @@ endif
 " let Vundle manage Vundle
 Plugin 'VundleVim/Vundle.vim'
 
-" My Plugins here:
-" original repos on github
-" vim-scripts repos
+"------ Global Editing Plugin -----------------------------------
 Plugin 'L9'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'kien/ctrlp.vim'
-Plugin 'vim-scripts/OmniCppComplete'
-Plugin 'chazy/cscope_maps'
 Plugin 'majutsushi/tagbar'
-Plugin 'gusman/vim-setting'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'AndrewRadev/simple_bookmarks.vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'lervag/vimtex'
+"Plugin 'powerline/powerline'
+
+"------ C Coding Plugin -----------------------------------------
+Plugin 'chazy/cscope_maps'
+Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'gusman/vim-setting'
+
+"------ Python Coding Plugin ------------------------------------
 Plugin 'davidhalter/jedi-vim'
+
+"------ Latex Coding Plugin -------------------------------------
+Plugin 'lervag/vimtex'
+
 
 call vundle#end()			" mandatory
 filetype plugin indent on	" mandatory
+
 " ================================================================
 " NERD Tree key mapping and configuration
 " ================================================================
@@ -340,7 +345,6 @@ let g:ctrlp_max_height = 25
 " =======================================
 " Grep
 " =======================================
-let Grep_Default_Options = '-nri --include="*.[chS]" --include="*.cpp" --include="*.CPP" --include="*.hpp" --include="*.HPP"' 
 let Grep_Skip_Files = '*.bak *~' 
 let Grep_Skip_Dirs = './.*'
 nnoremap <silent> <leader>g :Grep<CR>
@@ -378,3 +382,10 @@ let g:vimtex_latexmk_build_dir = 'build'
 " ======================================
 " TODO: Need to find out how to enable below option
 " let g:jedi#auto_initialization = 0
+
+
+" =============================================================================
+" My VIM Setting configuration
+" =============================================================================
+let g:c_cpp_editor = 1
+let g:project_mode = 1
