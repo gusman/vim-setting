@@ -1,6 +1,6 @@
-"===================================================================
+" =============================================================================
 " Common configuration
-"===================================================================
+" =============================================================================
 " User name
 let g:usr_name="Gusman Dharma Putra"
 
@@ -68,9 +68,9 @@ endif
 " File format setting
 set fileformats=unix,dos,mac
 
-" ================================================================
+" =============================================================================
 " Editing
-" ================================================================
+" =============================================================================
 "set ai                          "autoindent
 "set si                          "smartindent
 set backspace=indent,eol,start  "backspace behaviour
@@ -86,10 +86,10 @@ set ic                          "ignore case sensitive
 "set textwidth=79
 set noexpandtab
 
-" -- Configuration for specific editing 
-"  =====================================================================
+" =============================================================================
 "  Tab and space configuration
-"  =====================================================================
+" =============================================================================
+" -- Configuration for specific editing 
 function! DefaultEditor()
 	setlocal ts=4
 	setlocal sw=4
@@ -108,21 +108,11 @@ function! Tab4Editor()
 	setlocal noexpandtab
 endfunction
 
-function! TexEditor()
-	setlocal ts=4
-	setlocal sw=4
-	setlocal softtabstop=4
-	setlocal autoindent
-	setlocal expandtab
-	setlocal fileformat=unix
-endfunction
-
-
 " Set default tab value
 call DefaultEditor()
 
 
-" ================================================================
+" =============================================================================
 " Autocommand section
 " ================================================================
 " Only do this part when compiled with support for autocommands.
@@ -146,24 +136,22 @@ if has("autocmd")
 	" Also don't do it when the mark is in the first line, that is the default
 	" position when opening a file.
 	autocmd BufReadPost *
-	\ if line("'\"") > 1 && line("'\"") <= line("$") |
-	\   exe "normal! g`\"" |
-	\ endif
+	\if line("'\"") > 1 && line("'\"") <= line("$") |
+	\	exe "normal! g`\"" |
+	\endif
 	augroup END
 
-	" auto command for c file 
-	autocmd FileType java	 call Tab4Editor()
-	autocmd FileType vim     call Tab4Editor()	
-	autocmd FileType tex     call TexEditor()	
-
+	" auto command for specific file which has no handler
+	autocmd FileType java	call Tab4Editor()
+	autocmd FileType vim	call Tab4Editor()
 else
 	set autoindent " always set autoindenting on
 endif " has("autocmd")
 
 
-" ================================================================
+" =============================================================================
 " GUI Vim
-" ================================================================
+" =============================================================================
 if has("gui_running")
 	" Remove Gui Toolbar, it's useless
 	set guioptions-=T
@@ -187,18 +175,18 @@ if has("gui_running")
 	endif
 endif
 
-" ================================================================
+" =============================================================================
 " Common mapping
-" ================================================================
+" =============================================================================
 " Search hilight turn off key
 nnoremap <silent> <S-h>     :nohlsearch<CR>
 " toggle paste in insert on/off
 set pastetoggle=<F2>
 
 
-" ================================================================
+" =============================================================================
 " Tab pages mapping
-" ================================================================
+" =============================================================================
 " Insted of using below command please use original
 " gt : Next tab, gT : prev tab, igt : index tab
 " Tab new
@@ -211,9 +199,9 @@ set pastetoggle=<F2>
 " nmap <silent> <S-q>     :tabc<CR>
 
 
-" ================================================================
+" =============================================================================
 " Vundle setting
-" ===============================================================
+" =============================================================================
 filetype off		" mandatory
 
 " setup
@@ -228,7 +216,7 @@ endif
 " let Vundle manage Vundle
 Plugin 'VundleVim/Vundle.vim'
 
-"------ Global Editing Plugin -----------------------------------
+"------ Global Editing Plugin -------------------------------------------------
 Plugin 'L9'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'kien/ctrlp.vim'
@@ -236,29 +224,31 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'AndrewRadev/simple_bookmarks.vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Yggdroot/indentLine'
+Plugin 'airblade/vim-rooter'
 "Plugin 'powerline/powerline'
 
-"------ C Coding Plugin -----------------------------------------
+"------ C Coding Plugin -------------------------------------------------------
 Plugin 'chazy/cscope_maps'
 "Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'gusman/vim-setting'
 
-"------ Java Coding Plugin -------------------------------------
+"------ Java Coding Plugin ----------------------------------------------------
 " Plugin 'artur-shaik/vim-javacomplete2'
 
-"------ Python Coding Plugin ------------------------------------
+"------ Python Coding Plugin --------------------------------------------------
 Plugin 'davidhalter/jedi-vim'
 
-"------ Latex Coding Plugin -------------------------------------
+"------ Latex Coding Plugin ---------------------------------------------------
 Plugin 'lervag/vimtex'
 
 
 call vundle#end()			" mandatory
 filetype plugin indent on	" mandatory
 
-" ================================================================
+" =============================================================================
 " NERD Tree key mapping and configuration
-" ================================================================
+" =============================================================================
 nnoremap <silent> <F9>	:NERDTreeToggle<CR>
 
 " Quite when enter file "
@@ -270,17 +260,16 @@ let NERDTreeWinPos = "right"
 " Don't use fancy arrow to avoid garbage display
 let g:NERDTreeDirArrows=0
 
-" ==============================================================
+" =============================================================================
 " PATH configuration for windows only
-" ==============================================================
+" =============================================================================
 if has('win32')
 	let $PATH .=  ';' . $HOME . '\vimfiles\bundle\vim-setting\bin\'
 endif
 
-" ==========================
+" =============================================================================
 " cscope configuration
-" ==========================
-
+" =============================================================================
 if has("cscope")
 	set csto=0
 	set cst
@@ -297,9 +286,9 @@ if has("cscope")
 	set csverb
 endif
 
-" ==============================================================
+" =============================================================================
 " CTRLP configuration
-" ==============================================================
+" =============================================================================
 " Just search filename
 let g:ctrlp_by_filename = 1
 
@@ -308,7 +297,7 @@ let g:ctrlp_regexp = 1
 
 " No scan for dotfiles or dotfolder
 let g:ctrlp_dotfiles = 0
-  
+
 " No limit of number scanned files
 let g:ctrlp_max_files = 50000
 
@@ -320,53 +309,61 @@ let g:ctrlp_lazy_update = 100
 
 let g:ctrlp_max_height = 25
 
-" =======================================
+" =============================================================================
 " Grep
-" =======================================
-let Grep_Skip_Files = '*.bak *~' 
+" =============================================================================
+let Grep_Skip_Files = '*.bak *~'
 let Grep_Skip_Dirs = './.*'
 nnoremap <silent> <leader>g :Grep<CR>
 
-
-" =======================================
+" =============================================================================
 " Tagbar
-" =======================================
+" =============================================================================
 let g:tagbar_left = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_iconchars = ['+', '-']
 nnoremap <silent> <F8>      :TagbarToggle<CR>
 
-" =======================================
+" =============================================================================
 " Simple bookmark
-" =======================================
+" =============================================================================
 nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 
-" =======================================
+" =============================================================================
 " Colorscheme
-" =======================================
+" =============================================================================
 set background=dark
 if has("gui_running")
 	colorscheme solarized
 endif
 
-" =======================================
-" VIM TEX 
-" ======================================
+" =============================================================================
+" Indent Line
+" =============================================================================
+let g:indentLine_showFirstIndentLevel = 1
+set list listchars=tab:»-,trail:·,extends:»,precedes:«
+
+" =============================================================================
+" VIM TEX
+" =============================================================================
 " execute vim --servername VIM
 let g:vimtex_latexmk_build_dir = 'build'
-"
-" =======================================
+
+" =============================================================================
 " VIM JEDI
-" ======================================
+" =============================================================================
 " TODO: Need to find out how to enable below option
 " let g:jedi#auto_initialization = 0
 
 " =============================================================================
 " My VIM Setting configuration
 " =============================================================================
-" --- C and CPP Editor ---
+" C and CPP Editor
 let g:c_cpp_editor = 1
 let g:project_mode = 1
 
-" --- Python Editor    ---
+" Python Editor
 let g:py_editor = 1
+
+" Tex Editor
+let g:tex_editor = 1

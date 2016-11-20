@@ -1,7 +1,7 @@
 " ================================================================
 " Tab and spaces configuration
 " ================================================================
-function! Py_TabSpaces()
+function! Tex_TabSpaces()
 	setlocal ts=4
 	setlocal sw=4
 	setlocal softtabstop=4
@@ -13,33 +13,33 @@ endfunction
 " ================================================================
 " Key Map
 " ================================================================
-function! Py_KeyMapping()
+function! Tex_KeyMapping()
 
 endfunction
 
 " ================================================================
 " Global Configuration Setting Update
 " ================================================================
-function! Py_GlobalPluginReConfigure()
+function! Tex_GlobalPluginReConfigure()
 	" Grep config changes
-	let Grep_Default_Options = '-nri --include="*.py" --include="*.python"'
+	let Grep_Default_Options = '-nri --include="*.tex"'
 endfunction
 
 " ================================================================
 " Setup
 " ================================================================
-function! Py_EditorSetup()
-	"Entering PYTHON EDITOR
-	call Py_TabSpaces()
-	call Py_GlobalPluginReConfigure()
-	call Py_KeyMapping()
+function! Tex_EditorSetup()
+	"Entering TEX EDITOR
+	call Tex_TabSpaces()
+	call Tex_GlobalPluginReConfigure()
+	call Tex_KeyMapping()
 endfunction
 
 " ================================================================
 " Global control
 " ================================================================
-if (1 == g:py_editor)
-	if has("autocmd") 
-		autocmd FileType python call Py_EditorSetup()
+if (1 == g:tex_editor)
+	if has("autocmd")
+		autocmd FileType texthon call Tex_EditorSetup()
 	endif
 endif

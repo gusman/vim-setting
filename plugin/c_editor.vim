@@ -7,7 +7,7 @@ let s:py_script_loaded = 0
 " Function list related to python execution
 " =============================================================================
 function! GV_ProjectInfo()
-    echo "will define"
+	echo "will define"
 endfunction
 
 function! GV_Init()
@@ -32,7 +32,7 @@ function! GV_GenCscope()
 	else
 		py gv_gencscope()
 	endif
-    cs reset
+	cs reset
 endfunction
 
 function! GV_GenCtags()
@@ -140,7 +140,7 @@ endfunction
 " Global variable trigger
 " =============================================================================
 if (1 == g:c_cpp_editor)
-	if has("autocmd") 
+	if has("autocmd")
 		autocmd FileType c,cpp,h call C_CppEditorSetup()
 	endif
 endif
