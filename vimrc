@@ -96,7 +96,7 @@ function! DefaultEditor()
 	setlocal softtabstop=4
 	setlocal nowrap
 	setlocal linebreak
-	setlocal noexpandtab
+	setlocal expandtab
 endfunction
 
 function! Tab4Editor()
