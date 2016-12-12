@@ -348,6 +348,7 @@ set list listchars=tab:»-,trail:·,extends:»,precedes:«
 " =============================================================================
 " execute vim --servername VIM
 let g:vimtex_latexmk_build_dir = 'build'
+let g:tex_conceal = ''
 
 " =============================================================================
 " VIM JEDI

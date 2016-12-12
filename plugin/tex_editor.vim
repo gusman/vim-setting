@@ -40,6 +40,6 @@ endfunction
 " ================================================================
 if (1 == g:tex_editor)
 	if has("autocmd")
-		autocmd FileType texthon call Tex_EditorSetup()
+		autocmd FileType tex call Tex_EditorSetup()
 	endif
 endif
