@@ -44,7 +44,7 @@ set noea
 let g:clipbrdDefaultReg='+'
 
 " Always display status line
-set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+" set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 set laststatus=2  " Always show status line
 
 " Backup
@@ -226,7 +226,10 @@ Plugin 'AndrewRadev/simple_bookmarks.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-rooter'
-"Plugin 'powerline/powerline'
+
+"------ C Coding Plugin -------------------------------------------------------
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 "------ C Coding Plugin -------------------------------------------------------
 Plugin 'chazy/cscope_maps'
@@ -333,9 +336,19 @@ nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 " Colorscheme
 " =============================================================================
 set background=dark
+color solarized
 if has("gui_running")
 	colorscheme solarized
 endif
+
+" =============================================================================
+" Cursor Line Hilight
+" =============================================================================
+set cursorline
+hi cursoreline cterm=bold term=bold
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+highlight CursorLine guibg=#181818 ctermbg=234
 
 " =============================================================================
 " Indent Line
@@ -368,3 +381,5 @@ let g:py_editor = 1
 
 " Tex Editor
 let g:tex_editor = 1
+
+
