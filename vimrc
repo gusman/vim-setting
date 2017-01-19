@@ -79,7 +79,6 @@ set t_Co=256
 set backspace=indent,eol,start  "backspace behaviour
 syntax on                       "enable syntax color
 set hlsearch                    "higlight search resut
-set nowrap                      "nowrapping text
 set wrapscan                    "searching whole file
 set ic                          "ignore case sensitive
 "set cindent                     "set cindent (c language indentation)
@@ -140,8 +139,7 @@ if has("autocmd")
     augroup END
 
     " auto command for specific file which has no handler
-    autocmd FileType java	call Tab4Editor()
-    autocmd FileType vim	call Tab4Editor()
+    autocmd FileType java   call Tab4Editor()
 else
     set autoindent " always set autoindenting on
 endif " has("autocmd")
@@ -200,7 +198,7 @@ set pastetoggle=<F2>
 " =============================================================================
 " Vundle setting
 " =============================================================================
-filetype off		" mandatory
+filetype off        " mandatory
 
 " setup
 if has('win32')
@@ -334,9 +332,12 @@ nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 " Colorscheme
 " =============================================================================
 set background=dark
-color solarized
+"color solarized
 if has("gui_running")
     colorscheme solarized
+else
+    colorscheme murphy 
+    color murphy
 endif
 
 " =============================================================================
@@ -353,9 +354,9 @@ highlight CursorLine guibg=#181818 ctermbg=234
 " =============================================================================
 "highlight SpecialKey ctermbg=bg guibg=bg ctermfg=fg guifg=fg
 if has("gui_running")
-	highlight SpecialKey guibg=bg guifg=fg
+    highlight SpecialKey guibg=bg guifg=fg
 else
-	highlight SpecialKey ctermbg=bg 
+    highlight SpecialKey ctermbg=bg
 endif
 
 let s:gIndent = 0
