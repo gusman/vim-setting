@@ -62,11 +62,14 @@ set wildmode=list:longest
 
 " Show line on column 80
 if version >= 703
-	set colorcolumn=80
+    set colorcolumn=80
 endif
 
 " File format setting
 set fileformats=unix,dos,mac
+
+" Set terminal color
+set t_Co=256
 
 " =============================================================================
 " Editing
@@ -81,31 +84,26 @@ set wrapscan                    "searching whole file
 set ic                          "ignore case sensitive
 "set cindent                     "set cindent (c language indentation)
 
-" Set default tab value
-
-"set textwidth=79
-set noexpandtab
-
 " =============================================================================
 "  Tab and space configuration
 " =============================================================================
 " -- Configuration for specific editing 
 function! DefaultEditor()
-	setlocal ts=4
-	setlocal sw=4
-	setlocal softtabstop=4
-	setlocal nowrap
-	setlocal linebreak
-	setlocal expandtab
+    setlocal ts=4
+    setlocal sw=4
+    setlocal softtabstop=4
+    setlocal nowrap
+    setlocal linebreak
+    setlocal expandtab
 endfunction
 
 function! Tab4Editor()
-	setlocal ts=4
-	setlocal sw=4
-	setlocal softtabstop=4
-	setlocal nowrap
-	setlocal nolinebreak
-	setlocal noexpandtab
+    setlocal ts=4
+    setlocal sw=4
+    setlocal softtabstop=4
+    setlocal nowrap
+    setlocal nolinebreak
+    setlocal noexpandtab
 endfunction
 
 " Set default tab value
@@ -118,34 +116,34 @@ call DefaultEditor()
 " Only do this part when compiled with support for autocommands.
 " By default autocommand is active
 if has("autocmd")
-	" Use the default filetype settings, so that mail gets 'tw' set to 72,
-	" 'cindent' is on in C files, etc.
-	" Also load indent files, to automatically do language-dependent indenting.
-	filetype plugin indent on
+    " Use the default filetype settings, so that mail gets 'tw' set to 72,
+    " 'cindent' is on in C files, etc.
+    " Also load indent files, to automatically do language-dependent indenting.
+    filetype plugin indent on
 
-	" Put these in an autocmd group, so that we can delete them easily.
-	augroup vimrcEx
-	au!
+    " Put these in an autocmd group, so that we can delete them easily.
+    augroup vimrcEx
+    au!
 
-	" For all text files set 'textwidth' to 78 characters.
-	" autocmd FileType text setlocal textwidth=78
+    " For all text files set 'textwidth' to 78 characters.
+    " autocmd FileType text setlocal textwidth=78
 
-	" When editing a file, always jump to the last known cursor position.
-	" Don't do it when the position is invalid or when inside an event handler
-	" (happens when dropping a file on gvim).
-	" Also don't do it when the mark is in the first line, that is the default
-	" position when opening a file.
-	autocmd BufReadPost *
-	\if line("'\"") > 1 && line("'\"") <= line("$") |
-	\	exe "normal! g`\"" |
-	\endif
-	augroup END
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    " Also don't do it when the mark is in the first line, that is the default
+    " position when opening a file.
+    autocmd BufReadPost *
+    \if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \endif
+    augroup END
 
-	" auto command for specific file which has no handler
-	autocmd FileType java	call Tab4Editor()
-	autocmd FileType vim	call Tab4Editor()
+    " auto command for specific file which has no handler
+    autocmd FileType java	call Tab4Editor()
+    autocmd FileType vim	call Tab4Editor()
 else
-	set autoindent " always set autoindenting on
+    set autoindent " always set autoindenting on
 endif " has("autocmd")
 
 
@@ -153,26 +151,26 @@ endif " has("autocmd")
 " GUI Vim
 " =============================================================================
 if has("gui_running")
-	" Remove Gui Toolbar, it's useless
-	set guioptions-=T
+    " Remove Gui Toolbar, it's useless
+    set guioptions-=T
 
-	" Set line and column number
-	" set lines=44 columns=120
+    " Set line and column number
+    " set lines=44 columns=120
 
-	" Font selection
-	if has("gui_gtk3")
-		set guifont=hack\ 9 
-	elseif has("gui_gtk2")
-		set guifont=hack\ 9 
-	elseif has("gui_photon")
-		set guifont=Courier\ New:s11
-	elseif has("gui_kde")
-		set guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
-	elseif has("x11")
-		set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
-	else
-		set guifont=hack:h9:cDEFAULT
-	endif
+    " Font selection
+    if has("gui_gtk3")
+        set guifont=hack\ 9 
+    elseif has("gui_gtk2")
+        set guifont=hack\ 9 
+    elseif has("gui_photon")
+        set guifont=Courier\ New:s11
+    elseif has("gui_kde")
+        set guifont=Courier\ New/11/-1/5/50/0/0/0/1/0
+    elseif has("x11")
+        set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
+    else
+        set guifont=hack:h9:cDEFAULT
+    endif
 endif
 
 " =============================================================================
@@ -206,11 +204,11 @@ filetype off		" mandatory
 
 " setup
 if has('win32')
-	set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-	call vundle#begin('$HOME/vimfiles/bundle/')
+    set rtp+=$HOME/vimfiles/bundle/Vundle.vim
+    call vundle#begin('$HOME/vimfiles/bundle/')
 else
-	set rtp+=$HOME/.vim/bundle/Vundle.vim
-	call vundle#begin()
+    set rtp+=$HOME/.vim/bundle/Vundle.vim
+    call vundle#begin()
 endif
 
 " let Vundle manage Vundle
@@ -246,13 +244,13 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'lervag/vimtex'
 
 
-call vundle#end()			" mandatory
-filetype plugin indent on	" mandatory
+call vundle#end()           " mandatory
+filetype plugin indent on   " mandatory
 
 " =============================================================================
 " NERD Tree key mapping and configuration
 " =============================================================================
-nnoremap <silent> <F9>	:NERDTreeToggle<CR>
+nnoremap <silent> <F9>      :NERDTreeToggle<CR>
 
 " Quite when enter file "
 let NERDTreeQuitOnOpen = 1
@@ -267,26 +265,26 @@ let g:NERDTreeDirArrows=0
 " PATH configuration for windows only
 " =============================================================================
 if has('win32')
-	let $PATH .=  ';' . $HOME . '\vimfiles\bundle\vim-setting\bin\'
+    let $PATH .=  ';' . $HOME . '\vimfiles\bundle\vim-setting\bin\'
 endif
 
 " =============================================================================
 " cscope configuration
 " =============================================================================
 if has("cscope")
-	set csto=0
-	set cst
-	set nocsverb
+    set csto=0
+    set cst
+    set nocsverb
 
-	"example for cscope scritp
-	" add any database in current directory
-	" if filereadable("cscope.out")
-	"    cs add cscope.out
-	" else add database pointed to by environment
-	" elseif $CSCOPE_DB != ""
-	"    cs add $CSCOPE_DB
-	" endif
-	set csverb
+    "example for cscope scritp
+    " add any database in current directory
+    " if filereadable("cscope.out")
+    "    cs add cscope.out
+    " else add database pointed to by environment
+    " elseif $CSCOPE_DB != ""
+    "    cs add $CSCOPE_DB
+    " endif
+    set csverb
 endif
 
 " =============================================================================
@@ -338,7 +336,7 @@ nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 set background=dark
 color solarized
 if has("gui_running")
-	colorscheme solarized
+    colorscheme solarized
 endif
 
 " =============================================================================
@@ -353,8 +351,43 @@ highlight CursorLine guibg=#181818 ctermbg=234
 " =============================================================================
 " Indent Line
 " =============================================================================
-let g:indentLine_showFirstIndentLevel = 1
-set list listchars=tab:»-,trail:·,extends:»,precedes:«
+"highlight SpecialKey ctermbg=bg guibg=bg ctermfg=fg guifg=fg
+if has("gui_running")
+	highlight SpecialKey guibg=bg guifg=fg
+else
+	highlight SpecialKey ctermbg=bg 
+endif
+
+let s:gIndent = 0
+let g:indentLine_enabled = 0
+let g:indentLine_showFirstIndentLevel = 0
+let g:indentLine_setConceal = 1
+
+
+function! IndentEnable()
+    let s:gIndent = 1
+    let g:indentLine_showFirstIndentLevel = 1
+    set list listchars=tab:\|\ ,trail:·,extends:»,precedes:«
+    IndentLinesEnable
+endfunction
+
+function! IndentDisable()
+    let s:gIndent = 0
+    let g:indentLine_showFirstIndentLevel = 0
+    IndentLinesDisable
+    set listchars=tab:\ \ ,trail:\ ,eol:\ ,nbsp:\ 
+endfunction
+
+function! IndentToogle()
+    if 0 == s:gIndent
+        call IndentEnable()
+    else
+        call IndentDisable()
+    endif
+endfunction
+
+" Do not enable Indent by default
+nnoremap <silent> <F3>      :call IndentToogle()<CR>
 
 " =============================================================================
 " VIM TEX
@@ -381,5 +414,3 @@ let g:py_editor = 1
 
 " Tex Editor
 let g:tex_editor = 1
-
-
