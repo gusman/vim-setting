@@ -336,8 +336,11 @@ set background=dark
 if has("gui_running")
     colorscheme solarized
 else
-    colorscheme murphy 
-    color murphy
+    if  &term == 'xterm-termite'
+        colorscheme solarized 
+    else
+        colorscheme desert 
+    endif
 endif
 
 " =============================================================================
@@ -353,17 +356,20 @@ highlight CursorLine guibg=#181818 ctermbg=234
 " Indent Line
 " =============================================================================
 "highlight SpecialKey ctermbg=bg guibg=bg ctermfg=fg guifg=fg
-if has("gui_running")
-    highlight SpecialKey guibg=bg guifg=fg
-else
-    highlight SpecialKey ctermbg=bg
+"if has("gui_running")
+"    highlight SpecialKey guibg=bg guifg=fg
+"else
+"    highlight SpecialKey ctermbg=bg
+"endif
+
+if g:colors_name == "solarized"
+    highlight SpecialKey guibg=bg ctermbg=bg
 endif
 
 let s:gIndent = 0
 let g:indentLine_enabled = 0
 let g:indentLine_showFirstIndentLevel = 0
 let g:indentLine_setConceal = 1
-
 
 function! IndentEnable()
     let s:gIndent = 1
@@ -415,3 +421,4 @@ let g:py_editor = 1
 
 " Tex Editor
 let g:tex_editor = 1
+
