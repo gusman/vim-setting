@@ -350,20 +350,17 @@ set cursorline
 hi cursoreline cterm=bold term=bold
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
-highlight CursorLine guibg=#181818 ctermbg=234
+highlight CursorLine guibg=#073642 ctermbg=0
 
 " =============================================================================
 " Indent Line
 " =============================================================================
-"highlight SpecialKey ctermbg=bg guibg=bg ctermfg=fg guifg=fg
-"if has("gui_running")
-"    highlight SpecialKey guibg=bg guifg=fg
-"else
-"    highlight SpecialKey ctermbg=bg
-"endif
-
 if g:colors_name == "solarized"
-    highlight SpecialKey guibg=bg ctermbg=bg
+    if has("gui_running")
+        highlight SpecialKey guibg=bg 
+    else
+        highlight SpecialKey ctermbg=bg
+    endif
 endif
 
 let s:gIndent = 0
