@@ -23,6 +23,13 @@ endfunction
 function! Tex_GlobalPluginReConfigure()
     " Grep config changes
     let Grep_Default_Options = '-nri --include="*.tex"'
+
+    "Setup wrap and linebrea
+    set wrap
+    set linebreak
+
+    "Enable spelling
+    set spell
 endfunction
 
 " ================================================================
