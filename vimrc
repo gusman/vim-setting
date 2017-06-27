@@ -44,7 +44,7 @@ set noea
 let g:clipbrdDefaultReg='+'
 
 " Always display status line
-" set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 set laststatus=2  " Always show status line
 
 " Backup
@@ -148,6 +148,14 @@ endif " has("autocmd")
 " =============================================================================
 " GUI Vim
 " =============================================================================
+" Remove all menu setting
+set guioptions-=M
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
+" Font setting
 if has("gui_running")
     " Remove Gui Toolbar, it's useless
     set guioptions-=T
@@ -157,9 +165,9 @@ if has("gui_running")
 
     " Font selection
     if has("gui_gtk3")
-        set guifont=hack\ 9 
+        set guifont=Inconsolata\ 12
     elseif has("gui_gtk2")
-        set guifont=hack\ 9 
+        set guifont=Inconsolata\ 12
     elseif has("gui_photon")
         set guifont=Courier\ New:s11
     elseif has("gui_kde")
@@ -167,7 +175,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=hack:h9:cDEFAULT
+        set guifont=Inconsolata:h12:cDEFAULT
     endif
 endif
 
@@ -219,13 +227,17 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'AndrewRadev/simple_bookmarks.vim'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-rooter'
 
+"------ Color Theme Plugin -------------------------------------------------------
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'sickill/vim-monokai'
+
 "------ C Coding Plugin -------------------------------------------------------
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
 
 "------ C Coding Plugin -------------------------------------------------------
 Plugin 'chazy/cscope_maps'
@@ -240,6 +252,9 @@ Plugin 'davidhalter/jedi-vim'
 
 "------ Latex Coding Plugin ---------------------------------------------------
 Plugin 'lervag/vimtex'
+
+"------ Go Coding Plugin ---------------------------------------------------
+Plugin 'fatih/vim-go'
 
 
 call vundle#end()           " mandatory
@@ -334,14 +349,20 @@ nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 set background=dark
 "color solarized
 if has("gui_running")
-    colorscheme solarized
+    colorscheme molokai
 else
     if  &term == 'xterm-termite'
-        colorscheme solarized 
+        colorscheme molokai
     else
         colorscheme desert 
     endif
 endif
+
+
+"if g:colors_name == "molokai"
+"    let g:rehash256 = 1
+"    let g:molokai_original = 1
+"endif
 
 " =============================================================================
 " Cursor Line Hilight
@@ -350,7 +371,9 @@ set cursorline
 hi cursoreline cterm=bold term=bold
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
-highlight CursorLine guibg=#073642 ctermbg=0
+if g:colors_name == "solarized"
+    highlight CursorLine guibg=#073642 ctermbg=0
+endif
 
 " =============================================================================
 " Indent Line
@@ -419,3 +442,5 @@ let g:py_editor = 1
 " Tex Editor
 let g:tex_editor = 1
 
+" Go Edit
+let g:go_editor = 1
