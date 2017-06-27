@@ -229,6 +229,8 @@ Plugin 'vim-scripts/grep.vim'
 Plugin 'AndrewRadev/simple_bookmarks.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-rooter'
+Plugin 'rhlobo/vim-super-retab'
+
 
 "------ Color Theme Plugin -------------------------------------------------------
 Plugin 'altercation/vim-colors-solarized'
