@@ -91,7 +91,7 @@ function! DefaultEditor()
     setlocal ts=4
     setlocal sw=4
     setlocal softtabstop=4
-    setlocal nowrap
+    setlocal wrap
     setlocal linebreak
     setlocal expandtab
 endfunction
