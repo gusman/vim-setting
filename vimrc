@@ -353,18 +353,13 @@ set background=dark
 if has("gui_running")
     colorscheme molokai
 else
-    if  &term == 'xterm-termite'
+    if  &term == 'xterm-termite' || &term == 'screen-256color'
         colorscheme molokai
     else
         colorscheme desert 
     endif
 endif
 
-
-"if g:colors_name == "molokai"
-"    let g:rehash256 = 1
-"    let g:molokai_original = 1
-"endif
 
 " =============================================================================
 " Cursor Line Hilight
