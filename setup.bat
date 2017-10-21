@@ -15,4 +15,4 @@ IF NOT EXIST vimfiles\bundle\vundle (
     git clone https://github.com/VundleVim/Vundle.vim vimfiles\bundle\Vundle.vim
 )
 
-COPY vimfiles\bundle\vim-setting\vimrc _vimrc
+mklink _vimrc vimfiles\bundle\vim-setting\vimrc
