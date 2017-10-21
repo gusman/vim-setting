@@ -175,7 +175,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=Inconsolata:h12:cDEFAULT
+        set guifont=Consolas:h10:cDEFAULT
     endif
 endif
 
