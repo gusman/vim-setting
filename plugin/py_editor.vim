@@ -21,8 +21,7 @@ endfunction
 " Global Configuration Setting Update
 " ================================================================
 function! Py_GlobalPluginReConfigure()
-    " Grep config changes
-    let Grep_Default_Options = '-nri --include="*.py" --include="*.python"'
+
 endfunction
 
 " ================================================================

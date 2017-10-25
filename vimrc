@@ -225,7 +225,7 @@ Plugin 'L9'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/grep.vim'
+Plugin 'mhinz/vim-grepper'
 Plugin 'AndrewRadev/simple_bookmarks.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-rooter'
@@ -324,13 +324,6 @@ let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_lazy_update = 100
 
 let g:ctrlp_max_height = 25
-
-" =============================================================================
-" Grep
-" =============================================================================
-let Grep_Skip_Files = '*.bak *~'
-let Grep_Skip_Dirs = './.*'
-nnoremap <silent> <leader>g :Grep<CR>
 
 " =============================================================================
 " Tagbar

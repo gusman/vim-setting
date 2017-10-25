@@ -21,8 +21,7 @@ endfunction
 " Global Configuration Setting Update
 " ================================================================
 function! Go_GlobalPluginReConfigure()
-    " Grep config changes
-    let Grep_Default_Options = '-nri --include="*.go" --include="*.go"'
+
 endfunction
 
 " ================================================================

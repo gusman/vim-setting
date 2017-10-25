@@ -21,10 +21,7 @@ endfunction
 " Global Configuration Setting Update
 " ================================================================
 function! Tex_GlobalPluginReConfigure()
-    " Grep config changes
-    let Grep_Default_Options = '-nri --include="*.tex"'
-
-    "Setup wrap and linebrea
+    "Setup wrap and linebreak
     set wrap
     set linebreak
 

@@ -101,10 +101,7 @@ endfunction
 " Reconfigure GREP plugin and CTRL-P plugin
 " =============================================================================
 function! GV_GlobalPluginReConfigure()
-    " Grep config changes
-    let Grep_Default_Options = '-nri --include="*.[chS]" --include="*.cpp" --include="*.CPP" --include="*.hpp" --include="*.HPP"' 
-
-    " Grep config update
+    " CtrP config update
     if has("win32") && (1 == g:project_mode)
         let g:ctrlp_user_command = 'type %s\.gvproj\project.files'
     else
