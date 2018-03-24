@@ -1,9 +1,6 @@
 " =============================================================================
 " Common configuration
 " =============================================================================
-" User name
-let g:usr_name="Gusman Dharma Putra"
-
 " Use vim setting rather than vi setting
 set nocompatible
 
@@ -189,21 +186,6 @@ set pastetoggle=<F2>
 
 
 " =============================================================================
-" Tab pages mapping
-" =============================================================================
-" Insted of using below command please use original
-" gt : Next tab, gT : prev tab, igt : index tab
-" Tab new
-" nmap <silent> <S-t>     :tabnew<CR>
-" Tab next
-" nmap <silent> <S-right> :tabn<CR>
-" Tab previous
-" nmap <silent> <S-left>  :tabp<CR>
-" Tab close
-" nmap <silent> <S-q>     :tabc<CR>
-
-
-" =============================================================================
 " Vundle setting
 " =============================================================================
 filetype off        " mandatory
@@ -229,7 +211,6 @@ Plugin 'mhinz/vim-grepper'
 Plugin 'AndrewRadev/simple_bookmarks.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'airblade/vim-rooter'
-Plugin 'rhlobo/vim-super-retab'
 
 
 "------ Color Theme Plugin -------------------------------------------------------
@@ -244,6 +225,7 @@ Plugin 'sickill/vim-monokai'
 "------ C Coding Plugin -------------------------------------------------------
 Plugin 'chazy/cscope_maps'
 "Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'gusman/vim-setting'
 
 "------ Java Coding Plugin ----------------------------------------------------
@@ -412,6 +394,18 @@ nnoremap <silent> <F3>      :call IndentToogle()<CR>
 " execute vim --servername VIM
 let g:vimtex_latexmk_build_dir = 'build'
 let g:tex_conceal = ''
+
+" =============================================================================
+" Vim Grep
+" =============================================================================
+nnoremap <leader>g :Grepper -tool ag -cword -noprompt<cr>
+nnoremap <leader>G :Grepper -git ag -cword -noprompt<cr>
+
+" =============================================================================
+" Vim Gutentags
+" =============================================================================
+let g:gutentags_cache_dir = $HOME . '/.vimdata/ctags'
+
 
 " =============================================================================
 " VIM JEDI

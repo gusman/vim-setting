@@ -10,6 +10,11 @@ IF NOT EXIST .vimdata\backup (
     MKDIR .vimdata\backup
 )
 
+IF NOT EXIST .vimdata\ctags (
+    ECHO "CREATING CTAGS CACHE DIRECTORY"
+    MKDIR .vimdata\ctags
+)
+
 IF NOT EXIST vimfiles\bundle\vundle (
     ECHO "CLONING VUNDLE GIT"
     git clone https://github.com/VundleVim/Vundle.vim vimfiles\bundle\Vundle.vim
