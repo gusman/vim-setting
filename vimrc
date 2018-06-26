@@ -328,7 +328,7 @@ set background=dark
 if has("gui_running")
     colorscheme molokai
 else
-    if  &term == 'xterm-termite' || &term == 'screen-256color'
+    if  &term == 'xterm-256color' || &term == 'screen-256color'
         colorscheme molokai
     else
         colorscheme desert 
