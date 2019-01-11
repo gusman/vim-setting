@@ -203,14 +203,14 @@ endif
 Plugin 'VundleVim/Vundle.vim'
 
 "------ Global Editing Plugin -------------------------------------------------
-Plugin 'L9'
+"Plugin 'L9'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mhinz/vim-grepper'
 Plugin 'AndrewRadev/simple_bookmarks.vim'
 Plugin 'Yggdroot/indentLine'
-Plugin 'airblade/vim-rooter'
+"Plugin 'airblade/vim-rooter'
 
 
 "------ Color Theme Plugin -------------------------------------------------------
@@ -223,22 +223,22 @@ Plugin 'sickill/vim-monokai'
 "Plugin 'vim-airline/vim-airline-themes'
 
 "------ C Coding Plugin -------------------------------------------------------
-Plugin 'chazy/cscope_maps'
+"Plugin 'chazy/cscope_maps'
 "Plugin 'vim-scripts/OmniCppComplete'
-Plugin 'ludovicchabant/vim-gutentags'
+"Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'gusman/vim-setting'
 
 "------ Java Coding Plugin ----------------------------------------------------
 " Plugin 'artur-shaik/vim-javacomplete2'
 
 "------ Python Coding Plugin --------------------------------------------------
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 
 "------ Latex Coding Plugin ---------------------------------------------------
-Plugin 'lervag/vimtex'
+"Plugin 'lervag/vimtex'
 
 "------ Go Coding Plugin ---------------------------------------------------
-Plugin 'fatih/vim-go'
+"Plugin 'fatih/vim-go'
 
 
 call vundle#end()           " mandatory
