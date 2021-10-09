@@ -233,7 +233,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
 
 "------ Auto completion ------------------------------------------------------
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
