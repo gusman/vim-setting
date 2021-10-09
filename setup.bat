@@ -15,9 +15,4 @@ IF NOT EXIST .vimdata\ctags (
     MKDIR .vimdata\ctags
 )
 
-IF NOT EXIST vimfiles\bundle\vundle (
-    ECHO "CLONING VUNDLE GIT"
-    git clone https://github.com/VundleVim/Vundle.vim vimfiles\bundle\Vundle.vim
-)
-
-mklink _vimrc vimfiles\bundle\vim-setting\vimrc
+mklink _vimrc vimfiles\plugged\vim-setting\vimrc
