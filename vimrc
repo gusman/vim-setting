@@ -192,7 +192,7 @@ call plug#begin()
 
 "------ Global Editing Plug -------------------------------------------------
 "Plug 'L9'
-Plug 'scrooloose/nerdtree.git'
+Plug 'preservim/nerdtree'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
@@ -231,6 +231,9 @@ Plug 'gusman/vim-setting'
 "------ Syntax ----------------------------------------------------------------
 Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
+
+"------ Auto completion ------------------------------------------------------
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
