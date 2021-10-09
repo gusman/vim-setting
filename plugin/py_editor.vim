@@ -40,5 +40,6 @@ endfunction
 if (1 == g:py_editor)
     if has("autocmd") 
         autocmd FileType python call Py_EditorSetup()
+        au BufNewFile,BufRead *.py call Py_EditorSetup()
     endif
 endif

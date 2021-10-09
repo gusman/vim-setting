@@ -2,12 +2,12 @@
 " Tab and space configuration
 " =============================================================================
 function! C_CppEditor()
-    setlocal ts=8
-    setlocal sw=8
-    setlocal softtabstop=8
+    setlocal ts=4
+    setlocal sw=4
+    setlocal softtabstop=4
     setlocal nowrap
     setlocal nolinebreak
-    setlocal noexpandtab
+    setlocal expandtab
 endfunction
 
 " =============================================================================

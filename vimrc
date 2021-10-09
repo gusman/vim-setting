@@ -85,12 +85,12 @@ set ic                          "ignore case sensitive
 " =============================================================================
 " -- Configuration for specific editing 
 function! DefaultEditor()
-    setlocal ts=4
-    setlocal sw=4
-    setlocal softtabstop=4
-    setlocal wrap
-    setlocal linebreak
-    setlocal expandtab
+    set ts=4
+    set sw=4
+    set softtabstop=4
+    set wrap
+    set linebreak
+    set expandtab
 endfunction
 
 function! Tab4Editor()
@@ -172,7 +172,7 @@ if has("gui_running")
     elseif has("x11")
         set guifont=-*-courier-medium-r-normal-*-*-180-*-*-m-*-*
     else
-        set guifont=Inconsolata:h11
+        set guifont=Fira\ Code\ Retina:h10
     endif
 endif
 
@@ -186,63 +186,53 @@ set pastetoggle=<F2>
 
 
 " =============================================================================
-" Vundle setting
+" Vim-Plug setting
 " =============================================================================
-filetype off        " mandatory
+call plug#begin()
 
-" setup
-if has('win32')
-    set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-    call vundle#begin('$HOME/vimfiles/bundle/')
-else
-    set rtp+=$HOME/.vim/bundle/Vundle.vim
-    call vundle#begin()
-endif
-
-" let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
-
-"------ Global Editing Plugin -------------------------------------------------
-"Plugin 'L9'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mhinz/vim-grepper'
-Plugin 'AndrewRadev/simple_bookmarks.vim'
-Plugin 'Yggdroot/indentLine'
-"Plugin 'airblade/vim-rooter'
+"------ Global Editing Plug -------------------------------------------------
+"Plug 'L9'
+Plug 'scrooloose/nerdtree.git'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-grepper'
+Plug 'AndrewRadev/simple_bookmarks.vim'
+Plug 'Yggdroot/indentLine'
+"Plug 'airblade/vim-rooter'
 
 
-"------ Color Theme Plugin -------------------------------------------------------
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'sickill/vim-monokai'
+"------ Color Theme Plug -------------------------------------------------------
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'sickill/vim-monokai'
 
-"------ C Coding Plugin -------------------------------------------------------
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
+"------ C Coding Plug -------------------------------------------------------
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
-"------ C Coding Plugin -------------------------------------------------------
-"Plugin 'chazy/cscope_maps'
-"Plugin 'vim-scripts/OmniCppComplete'
-"Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'gusman/vim-setting'
+"------ C Coding Plug -------------------------------------------------------
+"Plug 'chazy/cscope_maps'
+"Plug 'vim-scripts/OmniCppComplete'
+"Plug 'ludovicchabant/vim-gutentags'
+Plug 'gusman/vim-setting'
 
-"------ Java Coding Plugin ----------------------------------------------------
-" Plugin 'artur-shaik/vim-javacomplete2'
+"------ Java Coding Plug ----------------------------------------------------
+" Plug 'artur-shaik/vim-javacomplete2'
 
-"------ Python Coding Plugin --------------------------------------------------
-"Plugin 'davidhalter/jedi-vim'
+"------ Python Coding Plug --------------------------------------------------
+"Plug 'davidhalter/jedi-vim'
 
-"------ Latex Coding Plugin ---------------------------------------------------
-"Plugin 'lervag/vimtex'
+"------ Latex Coding Plug ---------------------------------------------------
+"Plug 'lervag/vimtex'
 
-"------ Go Coding Plugin ---------------------------------------------------
-"Plugin 'fatih/vim-go'
+"------ Go Coding Plug ---------------------------------------------------
+"Plug 'fatih/vim-go'
 
+"------ Syntax ----------------------------------------------------------------
+Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
 
-call vundle#end()           " mandatory
-filetype plugin indent on   " mandatory
+call plug#end()
 
 " =============================================================================
 " NERD Tree key mapping and configuration
@@ -339,13 +329,13 @@ endif
 " =============================================================================
 " Cursor Line Hilight
 " =============================================================================
-set cursorline
-hi cursoreline cterm=bold term=bold
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
-if g:colors_name == "solarized"
-    highlight CursorLine guibg=#073642 ctermbg=0
-endif
+" set cursorline
+" hi cursoreline cterm=bold term=bold
+" autocmd WinEnter * setlocal cursorline
+" autocmd WinLeave * setlocal nocursorline
+" if g:colors_name == "solarized"
+"    highlight CursorLine guibg=#073642 ctermbg=0
+" endif
 
 " =============================================================================
 " Indent Line
@@ -405,6 +395,19 @@ nnoremap <leader>G :Grepper -git ag -cword -noprompt<cr>
 " Vim Gutentags
 " =============================================================================
 let g:gutentags_cache_dir = $HOME . '/.vimdata/ctags'
+
+
+" =============================================================================
+" VIM Syntastic
+" =============================================================================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 
 " =============================================================================

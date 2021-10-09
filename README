@@ -3,15 +3,15 @@ Requirements:
 2. Git
 
 Install Unix
-$ git clone https://github.com/gusman/vim-setting.git ~/.vim/bundle/vim-setting
-$ cd .vim/bundle/vim-setting
+$ git clone https://github.com/gusman/vim-setting.git ~/.vim/plugged/vim-setting
+$ cd .vim/plugged/vim-setting
 $ sh setup.sh
 
 Install Windows
-> git clone https://github.com/gusman/vim-setting.git %HOME%\vimfiles\bundle\vim-setting
-> cd %HOME%\vimfiles\bundle\vim-setting
+> git clone https://github.com/gusman/vim-setting.git %HOME%\vimfiles\plugged\vim-setting
+> cd %HOME%\vimfiles\plugged\vim-setting
 > setup.bat (This script requires administrator privilege)
 
 
 open vim and run below command
-:PluginInstall
+:PlugInstall
