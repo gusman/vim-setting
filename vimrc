@@ -194,7 +194,7 @@ call plug#begin()
 "Plug 'L9'
 Plug 'preservim/nerdtree'
 Plug 'kien/ctrlp.vim'
-Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'AndrewRadev/simple_bookmarks.vim'
 Plug 'Yggdroot/indentLine'
@@ -249,13 +249,14 @@ let NERDTreeQuitOnOpen = 1
 " Set win pos at right"
 let NERDTreeWinPos = "right"
 " Don't use fancy arrow to avoid garbage display
-let g:NERDTreeDirArrows=0
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
 
 " =============================================================================
 " PATH configuration for windows only
 " =============================================================================
 if has('win32')
-    let $PATH .=  ';' . $HOME . '\vimfiles\bundle\vim-setting\bin\'
+    let $PATH .=  ';' . $HOME . '\vimfiles\plugged\vim-setting\bin\'
 endif
 
 " =============================================================================
@@ -403,14 +404,14 @@ let g:gutentags_cache_dir = $HOME . '/.vimdata/ctags'
 " =============================================================================
 " VIM Syntastic
 " =============================================================================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 
 " =============================================================================
