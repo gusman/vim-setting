@@ -193,7 +193,7 @@ call plug#begin()
 "------ Global Editing Plug -------------------------------------------------
 "Plug 'L9'
 Plug 'preservim/nerdtree'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'preservim/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'AndrewRadev/simple_bookmarks.vim'
