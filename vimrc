@@ -310,6 +310,7 @@ nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 " Colorscheme
 " =============================================================================
 colorscheme gruvbox
+set bg=dark
 
 " =============================================================================
 " Cursor Line Hilight
