@@ -1,9 +1,6 @@
 " =============================================================================
 " Common configuration
 " =============================================================================
-" Use vim setting rather than vi setting
-set nocompatible
-
 " Set language menu, none = always use english "
 set langmenu=none
 
@@ -57,16 +54,8 @@ set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,
 " Turn on wild mode huge list
 set wildmode=list:longest
 
-" Show line on column 80
-if version >= 703
-    set colorcolumn=80
-endif
-
 " File format setting
 set fileformats=unix,dos,mac
-
-" Set terminal color
-set t_Co=256
 
 " =============================================================================
 " Editing
@@ -205,7 +194,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
 Plug 'sickill/vim-monokai'
-
+Plug 'morhetz/gruvbox'
 "------ C Coding Plug -------------------------------------------------------
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
@@ -301,6 +290,9 @@ let g:ctrlp_lazy_update = 100
 
 let g:ctrlp_max_height = 25
 
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*.so,*.swp,*.zip,*.JPEG,*.jpeg,*.JPG,*.JPEG,*.PNG,*.png
+
 " =============================================================================
 " Tagbar
 " =============================================================================
@@ -317,18 +309,7 @@ nnoremap <silent> <leader>b      :CopenBookmarks<CR>
 " =============================================================================
 " Colorscheme
 " =============================================================================
-set background=dark
-"color solarized
-if has("gui_running")
-    colorscheme molokai
-else
-    if  &term == 'xterm-256color' || &term == 'screen-256color'
-        colorscheme molokai
-    else
-        colorscheme desert 
-    endif
-endif
-
+colorscheme gruvbox
 
 " =============================================================================
 " Cursor Line Hilight
